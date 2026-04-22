@@ -1,0 +1,17 @@
+# NixOS specific
+result/
+backup/
+new/
+
+# Git
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Secrets (if any)
+*.age
+*.env
