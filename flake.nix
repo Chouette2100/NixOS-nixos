@@ -124,6 +124,7 @@
               git
               htop
               distrobox
+              age
             ];
 
             # SSH

@@ -1,6 +1,7 @@
 # NixOS specific
 result/
 backup/
+secrets/
 new/
 
 # Git
