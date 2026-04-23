@@ -144,6 +144,22 @@
             # ファイアウォールも新しいポートを開ける
             networking.firewall.allowedTCPPorts = [ 9978 ];
 
+  # NFSクライアントに必要なパッケージ（NixOSは自動で読み込むことが多いが念のため）
+  # environment.systemPackages = [ pkgs.nfs-utils ];
+
+  # マウントの設定
+  fileSystems."/mnt/nfsh" = {
+    device = "192.168.0.13:/mnt/lxddefault/custom/default_samba"; # NFSサーバーのIPとエクスポートパス
+    fsType = "nfs";
+    options = [
+      "nfsvers=4.2"      # NFSバージョン (4.0, 4.1, 4.2)
+      "rw"               # 読み書き許可
+      "soft"             # タイムアウト時にエラーを返す（hardにすると応答があるまで無限リトライ）
+      "intr"             # ファイル操作を中断可能にする
+      "nofail"           # マウント失敗時に起動を止めない（重要）
+    ];
+  };
+
             # 状態バージョン
             system.stateVersion = "25.11";
           })
