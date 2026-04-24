@@ -1,8 +1,8 @@
 # NixOS specific
-result/
+result
 result-*
-backup/
-new/
+backup
+new
 
 # Git
 *.swp
