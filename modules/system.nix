@@ -27,7 +27,12 @@
 
   time.timeZone = "Asia/Tokyo";
   
+  # 日本語ロケール設定
   i18n.defaultLocale = "ja_JP.UTF-8";
+  i18n.supportedLocales = [
+    "ja_JP.UTF-8/UTF-8"
+    "en_US.UTF-8/UTF-8"
+  ];
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "ja_JP.UTF-8";
     LC_IDENTIFICATION = "ja_JP.UTF-8";
@@ -40,5 +45,24 @@
     LC_TIME = "ja_JP.UTF-8";
   };
 
+  # fcitx5 + mozc 日本語入力設定
+  i18n.inputMethod = {
+    type = "fcitx5";
+    enable = true;
+    fcitx5.addons = with pkgs; [
+      fcitx5-mozc
+      fcitx5-gtk
+    ];
+  };
+
+  # 環境変数（アプリケーションがfcitx5を認識するため）
+  environment.sessionVariables = {
+    GTK_IM_MODULE = "fcitx";
+    QT_IM_MODULE = "fcitx";
+    XMODIFIERS = "@im=fcitx";
+    SDL_IM_MODULE = "fcitx";
+  };
+
   nixpkgs.config.allowUnfree = true;
 }
+
