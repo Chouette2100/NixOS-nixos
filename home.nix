@@ -24,10 +24,10 @@
         User git
         IdentityFile ~/.ssh/id_ed25519
         IdentitiesOnly yes
-    
-      Host *
-        AddKeysToAgent yes
-        UseKeychain yes
+#   
+#     Host *
+#       AddKeysToAgent yes
+#       UseKeychain yes
       '';
       force = true;
     };
