@@ -12,6 +12,10 @@
       source = ./secrets/id_ed25519.pub;
       force = true;  # 追加
     };
+#   ".ssh/authorized_keys" = {
+#     source = ./secrets/authorized_keys;
+#     force = true;  # 追加
+#   };
     # SSH設定ファイル（textを使用）
     ".ssh/config" = {
       text = ''
