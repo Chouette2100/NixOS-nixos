@@ -2,6 +2,8 @@
 # sshdを起動する
 # configuration.nixを2箇所修正すれば22で接続できる
 
+# sudo nixos-rebuild switch
+
 # リモートから
 # ~/Backup/nixos/NixOS-nixos-202........tar.z　をnixosに転送する
 
