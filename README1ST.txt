@@ -1,28 +1,28 @@
-# NixOSをインストールする
-# sshdを起動する
-# configuration.nixを2箇所修正すれば22で接続できる
+NixOSをインストールする
+sshdを起動する
+configuration.nixを2箇所修正すれば22で接続できる
 
-# sudo nixos-rebuild switch
+$ sudo nixos-rebuild switch
 
-# リモートから
-# ~/Backup/nixos/NixOS-nixos-202........tar.z　をnixosに転送する
+リモートから
+~/Backup/nixos/NixOS-nixos-202........tar.z　をnixosに転送する
 
-tar xvf NixOS-nixos-202.......tar.z
+$ tar xvf NixOS-nixos-202.......tar.z
 
-vi ~/.config/age/key.txt
+$ vi ~/.config/age/key.txt
 
-cd ~/NixOS-nixos
+$ cd ~/NixOS-nixos
 
-# OSインストール直後
-# cp -a /etc/nixos/hardware-configuration.nix .
-# mkdir ~/.ssh
+OSインストール直後
+$ cp -a /etc/nixos/hardware-configuration.nix .
+$ mkdir ~/.ssh
 
-# 場合によっては
-# rm ../.ssh/config
+場合によっては(2回目以降？)
+$ rm ../.ssh/config
 
-mv .git git
+$ mv .git git
 
-.build.sh
+$ .build.sh
 
 
 
