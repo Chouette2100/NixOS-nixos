@@ -1,4 +1,5 @@
 NixOSをインストールする
+
 sshdを起動する
 configuration.nixを2箇所修正すれば22で接続できる
 
@@ -30,3 +31,4 @@ $ .build.sh
 
 最初に.sshを作成しなければならない
 ~/.ssh/configを削除しなければならないケースがある
+~/.ssh/configの内容については検討の必要がある
