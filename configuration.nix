@@ -27,6 +27,7 @@
     distrobox
     nfs-utils
     age  # ageをシステムにインストール
+    librecad
   ];
 
   # SSHサーバー設定
