@@ -9,6 +9,20 @@
     ./modules/system.nix
   ];
 
+  # SPICE ゲストエージェントサービスを有効化
+# services.qemuGuest.enable = true;
+  services.spice-vdagentd.enable = true;
+
+  # 必要に応じて SPICE 対応のグラフィックドライバを追加（QXL など）
+  # QXL ドライバを使用する場合（virt-viewer などから接続）
+  boot.kernelParams = [ "video=2560x1440@60" ]; # 解像度指定は任意
+  services.xserver.videoDrivers = [ "qxl" ];   # X11 の場合
+
+# # パッケージはサービスが自動的に追加するが、明示したい場合
+# environment.systemPackages = with pkgs; [
+#   spice-vdagent
+# ];
+
   # ユーザー設定
   users.users.chouette = {
     isNormalUser = true;
@@ -21,6 +35,7 @@
 
   # システムパッケージ
   environment.systemPackages = with pkgs; [
+    spice-vdagent
     vim
     git
     htop
@@ -28,7 +43,22 @@
     nfs-utils
     age  # ageをシステムにインストール
     librecad
+    inkscape
+    gforth
+    joplin-desktop
+#   vscode
+#   neovim
+#   vimPlugins.LazyVim
   ];
+
+environment.etc."xdg/autostart/spice-vdagent.desktop".text = ''
+  [Desktop Entry]
+  Name=Spice vdagent
+  Exec=spice-vdagent
+  Type=Application
+  X-GNOME-Autostart-enabled=true
+  NoDisplay=true
+'';
 
   # SSHサーバー設定
   services.openssh = {
