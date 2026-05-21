@@ -83,6 +83,9 @@
     "f /home/chouette/.ssh/config 0600 - - - -"
   ];
 
+  # ユーザーセッションで spice-vdagent を自動起動
+  # service.spice-vdagent.enable = true;
+
   # Git設定
   programs.git = {
     enable = true;
@@ -123,6 +126,12 @@
       fi
     '';
   };
+
+  xdg.configFile."kscreenlockerrc".text = ''
+    [Daemon]
+    Autolock=false
+    LockOnStartup=false
+  '';
 
   # 便利なパッケージ
   home.packages = with pkgs; [
