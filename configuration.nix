@@ -46,6 +46,7 @@
     inkscape
     gforth
     joplin-desktop
+    obsidian
 #   vscode
 #   neovim
 #   vimPlugins.LazyVim
@@ -71,6 +72,14 @@ environment.etc."xdg/autostart/spice-vdagent.desktop".text = ''
   };
 
   networking.firewall.allowedTCPPorts = [ 9978 ];
+
+services.syncthing = {
+  enable = true;
+  user = "chouette";
+  dataDir = "/home/chouette/MyProject/Obsidian"; # デフォルトの保存先
+  configDir = "/home/chouette/.config/syncthing";
+  guiAddress = "127.0.0.1:8384";
+};
 
   # 状態バージョン
   system.stateVersion = "25.11";
