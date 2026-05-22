@@ -83,6 +83,17 @@
     "f /home/chouette/.ssh/config 0600 - - - -"
   ];
 
+  programs.vscode = {
+    enable = true;
+    package = pkgs.vscode;
+    extensions = with pkgs.vscode-extensions; [
+      golang.go
+      mhutchie.git-graph
+      ms-ceintl.vscode-language-pack-ja
+      vscodevim.vim
+    ];
+  };
+
   # ユーザーセッションで spice-vdagent を自動起動
   # service.spice-vdagent.enable = true;
 
