@@ -144,6 +144,37 @@
     LockOnStartup=false
   '';
 
+systemd.user.services.dropbox-mount = {
+  Unit = {
+    Description = "Dropbox mount (rclone)";
+    After = [ "network-online.target" ];
+    Wants = [ "network-online.target" ];
+  };
+
+  Service = {
+    Type = "simple";
+    # --daemon フラグを削除し、フォアグラウンドで実行させる
+    ExecStart = ''
+      ${pkgs.rclone}/bin/rclone mount dropbox: %h/Dropbox \
+        --config=/home/chouette/.config/rclone/rclone.conf \
+        --vfs-cache-mode writes
+    #   --vfs-cache-mode writes \
+    #   --nomsgbuf
+    '';
+    # 終了時に確実にアンマウントする
+    ExecStop = "/run/current-system/sw/bin/fusermount -u /home/chouette/Dropbox";
+    Restart = "on-failure";
+    RestartSec = "10s";
+    # マウントポイントが存在しない場合に備えて作成する（必要に応じて）
+    ExecStartPre = "/run/current-system/sw/bin/mkdir -p /home/chouette/Dropbox";
+  };
+
+  Install = {
+    WantedBy = [ "default.target" ];
+  };
+};
+
+
   # 便利なパッケージ
   home.packages = with pkgs; [
     neovim

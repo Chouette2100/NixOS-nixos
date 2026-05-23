@@ -81,7 +81,7 @@ environment.etc."xdg/autostart/spice-vdagent.desktop".text = ''
     dataDir = "/home/chouette/MyProject/Obsidian"; # デフォルトの保存先
     configDir = "/home/chouette/.config/syncthing";
     guiAddress = "127.0.0.1:8384";
-  };
+};
 
 # id=4401   modelname=deepseek-v4-flash   maxtokens=20000   [26-05-23 14:02 ( 26.5s)]
 # 事前準備
@@ -104,42 +104,11 @@ environment.etc."xdg/autostart/spice-vdagent.desktop".text = ''
 # # 3. アンマウント
 # fusermount -u ~/Dropbox
 
-  {
-    # rclone をインストール
-    environment.systemPackages = [ pkgs.rclone ];
+# {
+  # rclone をインストール
+  # environment.systemPackages = [ pkgs.rclone ];
 
-    # マウントポイントを自動マウントする systemd ユニットの例
-    systemd.user.services.dropbox-mount = {
-      description = "Dropbox mount (rclone)";
-      wantedBy = [ "default.target" ];
-      serviceConfig = {
-        ExecStart = "${pkgs.rclone}/bin/rclone mount dropbox: /home/chouette/Dropbox --config=/home/chouette/.config/rclone/rclone.conf --daemon";
-        ExecStop = "${pkgs.rclone}/bin/rclone unmount /home/chouette/Dropbox";
-        Type = "forking";
-        Restart = "on-failure";
-      };
-    };
-  }
-
-# # 3. アンマウント
-# fusermount -u ~/Dropbox
-
-  {
-    # rclone をインストール
-    environment.systemPackages = [ pkgs.rclone ];
-
-    # マウントポイントを自動マウントする systemd ユニットの例
-    systemd.user.services.dropbox-mount = {
-      description = "Dropbox mount (rclone)";
-      wantedBy = [ "default.target" ];
-      serviceConfig = {
-        ExecStart = "${pkgs.rclone}/bin/rclone mount dropbox: /home/chouette/Dropbox --config=/home/chouette/.config/rclone/rclone.conf --daemon";
-        ExecStop = "${pkgs.rclone}/bin/rclone unmount /home/chouette/Dropbox";
-        Type = "forking";
-        Restart = "on-failure";
-      };
-    };
-  }
+  # マウントポイントを自動マウントする systemd ユニットの例
 
   # 状態バージョン
   system.stateVersion = "25.11";
