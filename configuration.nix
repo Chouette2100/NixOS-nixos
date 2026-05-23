@@ -36,6 +36,7 @@
   # システムパッケージ
   environment.systemPackages = with pkgs; [
     spice-vdagent
+    rclone
     vim
     git
     htop
@@ -74,13 +75,71 @@ environment.etc."xdg/autostart/spice-vdagent.desktop".text = ''
 
   networking.firewall.allowedTCPPorts = [ 9978 ];
 
-services.syncthing = {
-  enable = true;
-  user = "chouette";
-  dataDir = "/home/chouette/MyProject/Obsidian"; # デフォルトの保存先
-  configDir = "/home/chouette/.config/syncthing";
-  guiAddress = "127.0.0.1:8384";
-};
+  services.syncthing = {
+    enable = true;
+    user = "chouette";
+    dataDir = "/home/chouette/MyProject/Obsidian"; # デフォルトの保存先
+    configDir = "/home/chouette/.config/syncthing";
+    guiAddress = "127.0.0.1:8384";
+  };
+
+# id=4401   modelname=deepseek-v4-flash   maxtokens=20000   [26-05-23 14:02 ( 26.5s)]
+# 事前準備
+# # 1. rclone をインストールして設定
+# rclone config
+# # → new remote → name: dropbox → type: dropbox → 認証URLにブラウザでアクセス
+
+# # 2. テストマウント
+# mkdir ~/Dropbox
+# # id=4401   modelname=deepseek-v4-flash   maxtokens=20000   [26-05-23 14:02 ( 26.5s)]
+# 事前準備
+# # 1. rclone をインストールして設定
+# rclone config
+# # → new remote → name: dropbox → type: dropbox → 認証URLにブラウザでアクセス
+
+# # 2. テストマウント
+# mkdir ~/Dropbox
+# rclone mount dropbox: ~/Dropbox &
+
+# # 3. アンマウント
+# fusermount -u ~/Dropbox
+
+  {
+    # rclone をインストール
+    environment.systemPackages = [ pkgs.rclone ];
+
+    # マウントポイントを自動マウントする systemd ユニットの例
+    systemd.user.services.dropbox-mount = {
+      description = "Dropbox mount (rclone)";
+      wantedBy = [ "default.target" ];
+      serviceConfig = {
+        ExecStart = "${pkgs.rclone}/bin/rclone mount dropbox: /home/chouette/Dropbox --config=/home/chouette/.config/rclone/rclone.conf --daemon";
+        ExecStop = "${pkgs.rclone}/bin/rclone unmount /home/chouette/Dropbox";
+        Type = "forking";
+        Restart = "on-failure";
+      };
+    };
+  }
+
+# # 3. アンマウント
+# fusermount -u ~/Dropbox
+
+  {
+    # rclone をインストール
+    environment.systemPackages = [ pkgs.rclone ];
+
+    # マウントポイントを自動マウントする systemd ユニットの例
+    systemd.user.services.dropbox-mount = {
+      description = "Dropbox mount (rclone)";
+      wantedBy = [ "default.target" ];
+      serviceConfig = {
+        ExecStart = "${pkgs.rclone}/bin/rclone mount dropbox: /home/chouette/Dropbox --config=/home/chouette/.config/rclone/rclone.conf --daemon";
+        ExecStop = "${pkgs.rclone}/bin/rclone unmount /home/chouette/Dropbox";
+        Type = "forking";
+        Restart = "on-failure";
+      };
+    };
+  }
 
   # 状態バージョン
   system.stateVersion = "25.11";
