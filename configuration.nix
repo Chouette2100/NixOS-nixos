@@ -47,6 +47,7 @@
     gforth
     joplin-desktop
     obsidian
+    go
 #   vscode
 #   neovim
 #   vimPlugins.LazyVim
