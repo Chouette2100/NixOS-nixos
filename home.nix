@@ -132,7 +132,21 @@
       ll = "ls -la";
       update = "sudo nixos-rebuild switch --flake /etc/nixos#nixos";
       rebuild = "sudo nixos-rebuild switch --flake /etc/nixos#nixos";
+      testbuild = "sudo nixos-rebuild test --flake /etc/nixos#nixos";
+      bootbuild = "sudo nixos-rebuild boot --flake /etc/nixos#nixos";
       clean = "sudo nix-collect-garbage -d";
+      nixcheck = "nix flake check /home/chouette/NixOS-nixos";
+
+      dbx-start = "systemctl --user start dropbox-mount";
+      dbx-stop = "systemctl --user stop dropbox-mount";
+      dbx-restart = "systemctl --user restart dropbox-mount";
+      dbx-status = "systemctl --user status dropbox-mount";
+      dbx-log = "journalctl --user -u dropbox-mount -n 200 --no-pager";
+      dbx-logf = "journalctl --user -u dropbox-mount -f";
+      dbx-unmount = "fusermount -u /home/chouette/Dropbox";
+
+      pwhash = "openssl passwd -6";
+      myip = "ip -br a";
     };
     
     initExtra = ''
