@@ -27,6 +27,7 @@
   # ユーザー設定
   users.users.chouette = {
     isNormalUser = true;
+  # homeMode = "0755"; # ここでパーミッションを指定できます
     uid = 1001;
     description = "Chouette2100";
     extraGroups = [ "networkmanager" "wheel" "incus-admin" ];
@@ -37,6 +38,7 @@
 
   users.users.ubuntu = {
     isNormalUser = true;
+  # homeMode = "0755"; # ここでパーミッションを指定できます
     uid = 1000;
     description = "ubuntu";
     extraGroups = [ "networkmanager" "wheel" ];
