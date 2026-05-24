@@ -7,6 +7,7 @@
     ./modules/containers.nix
     ./modules/networking.nix
     ./modules/system.nix
+    ./modules/service.nix
   ];
 
   # SPICE ゲストエージェントサービスを有効化
@@ -82,33 +83,6 @@ environment.etc."xdg/autostart/spice-vdagent.desktop".text = ''
     configDir = "/home/chouette/.config/syncthing";
     guiAddress = "127.0.0.1:8384";
 };
-
-# id=4401   modelname=deepseek-v4-flash   maxtokens=20000   [26-05-23 14:02 ( 26.5s)]
-# 事前準備
-# # 1. rclone をインストールして設定
-# rclone config
-# # → new remote → name: dropbox → type: dropbox → 認証URLにブラウザでアクセス
-
-# # 2. テストマウント
-# mkdir ~/Dropbox
-# # id=4401   modelname=deepseek-v4-flash   maxtokens=20000   [26-05-23 14:02 ( 26.5s)]
-# 事前準備
-# # 1. rclone をインストールして設定
-# rclone config
-# # → new remote → name: dropbox → type: dropbox → 認証URLにブラウザでアクセス
-
-# # 2. テストマウント
-# mkdir ~/Dropbox
-# rclone mount dropbox: ~/Dropbox &
-
-# # 3. アンマウント
-# fusermount -u ~/Dropbox
-
-# {
-  # rclone をインストール
-  # environment.systemPackages = [ pkgs.rclone ];
-
-  # マウントポイントを自動マウントする systemd ユニットの例
 
   # 状態バージョン
   system.stateVersion = "25.11";

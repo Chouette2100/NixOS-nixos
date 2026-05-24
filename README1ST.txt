@@ -6,11 +6,11 @@ configuration.nixを2箇所修正すれば22で接続できる
 $ sudo nixos-rebuild switch
 
 リモートから
-~/Backup/nixos/NixOS-nixos-202........tar.z　をnixosに転送する
+~/Backup/nixos/NixOS-nixos-202........tar.z　をnixosにsftpで転送する
 
 $ tar xvf NixOS-nixos-202.......tar.z
 
-$ vi ~/.config/age/key.txt
+$ vi ~/.config/age/key.txt  # age秘密鍵
 
 $ cd ~/NixOS-nixos
 

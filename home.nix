@@ -83,15 +83,21 @@
     "f /home/chouette/.ssh/config 0600 - - - -"
   ];
 
+  # vscode
+  # id=4408   modelname=gemini-3-flash-preview   maxtokens=20000   [26-05-24 10:56 ( 10.3s)]
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
-    extensions = with pkgs.vscode-extensions; [
-      golang.go
-      mhutchie.git-graph
-      ms-ceintl.vscode-language-pack-ja
-      vscodevim.vim
-    ];
+    # profiles.default を追加し、その中に extensions を移動します
+    profiles.default = {
+      extensions = with pkgs.vscode-extensions; [
+        golang.go
+        mhutchie.git-graph
+        ms-ceintl.vscode-language-pack-ja
+        vscodevim.vim
+      ];
+      # もし userSettings などがあれば、それもここ（profiles.default内）に移動できます
+    };
   };
 
   # ユーザーセッションで spice-vdagent を自動起動
