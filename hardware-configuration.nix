@@ -50,15 +50,12 @@ in
       options = [ "subvol=@home" ];
     };
 
-# fileSystems."/nix" =
-#   { device = 
-#       if isQemu then
-#         "/dev/disk/by-uuid/6b6700e6-e806-4cf9-bdb3-4896318ae444"
-#       else
-#         "/dev/disk/by-uuid/d325e226-2824-4d85-a4f9-5e6af3697699";
-#     fsType = "btrfs";
-#     options = [ "subvol=@nix" ];
-#   };
+  # 実機のみ：/nix を独立サブボリュームにマウント
+  fileSystems."/nix" = lib.mkIf isBaremetal
+    { device = "/dev/disk/by-uuid/d325e226-2824-4d85-a4f9-5e6af3697699";
+      fsType = "btrfs";
+      options = [ "subvol=@nix" ];
+    };
 
   fileSystems."/boot" =
     { device = 

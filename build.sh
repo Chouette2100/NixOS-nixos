@@ -3,11 +3,6 @@
 # ls -l /home/chouette/.ssh/
 
 # 起動方法: ./build.sh [qemu|600g4]
-# root権限が必要なため、sudoを使用して実行してください。
-if [ "$EUID" -ne 0 ]; then
-    echo "Please run as root"
-    exit 1
-fi
 if [ -z "$1" ]; then
     echo "Usage: $0 [qemu|600g4]"
     exit 1

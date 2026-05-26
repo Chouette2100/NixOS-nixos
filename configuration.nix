@@ -13,11 +13,8 @@ in
     ./modules/service.nix
   ];
 
-  # QEMU/KVM
+  # QEMU/KVM専用設定（SPICE / QXL）
   services.spice-vdagentd.enable = isQemu;
-
-  # 必要に応じて SPICE 対応のグラフィックドライバを追加（QXL など）
-  # QXL ドライバを使用する場合（virt-viewer などから接続）
   boot.kernelParams = lib.optionals isQemu [ "video=2560x1440@60" ];
   services.xserver.videoDrivers = lib.optionals isQemu [ "qxl" ];
 
@@ -53,7 +50,6 @@ in
     git
     htop
     distrobox
-    nfs-utils
     age  # ageをシステムにインストール
     openssl
     librecad
@@ -62,6 +58,7 @@ in
     joplin-desktop
     obsidian
     go
+    lsof
 #   vscode
 #   neovim
 #   vimPlugins.LazyVim
