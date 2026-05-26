@@ -8,10 +8,11 @@
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
-  outputs = { self, nixpkgs, home-manager, ... }@inputs: {
-    nixosConfigurations = {
-      nixos = nixpkgs.lib.nixosSystem {
+  outputs = { self, nixpkgs, home-manager, ... }@inputs:
+    let
+      mkNixosConfig = machineType: nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
+        specialArgs = { inherit machineType; };
         
         modules = [
           ./hardware-configuration.nix
@@ -29,6 +30,11 @@
           }
         ];
       };
+    in
+    {
+      nixosConfigurations = {
+        qemu = mkNixosConfig "qemu";
+        baremetal = mkNixosConfig "baremetal";
+      };
     };
-  };
 }
