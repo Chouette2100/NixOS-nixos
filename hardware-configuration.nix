@@ -4,29 +4,74 @@
 { config, lib, pkgs, modulesPath, ... }:
 
 {
-  imports =
+# 600G4
+# imports =
+#   [ (modulesPath + "/installer/scan/not-detected.nix")
+#   ];
+# -----
+# QEMU/KVM 
+    imports =
     [ (modulesPath + "/profiles/qemu-guest.nix")
     ];
+# -------- 
 
+
+# 600G4
+# boot.initrd.availableKernelModules = [ "xhci_pci" "ahci" "nvme" "usb_storage" "usbhid" "sd_mod" "sr_mod" ];
+# -----
+# QEMU/KVM 
   boot.initrd.availableKernelModules = [ "ahci" "xhci_pci" "virtio_pci" "sr_mod" "virtio_blk" ];
+# -------- 
+ 
   boot.initrd.kernelModules = [ ];
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
+# fileSystems."/tmp" =
+#   { device = "/dev/disk/by-uuid/2af9c009-cd0e-4d9f-9319-e33e20ba2962";
+#     fsType = "btrfs";
+#   };
+
   fileSystems."/" =
+# 600G4
+#   { device = "/dev/disk/by-uuid/d325e226-2824-4d85-a4f9-5e6af3697699";
+# -----
+# QEMU/KVM 
     { device = "/dev/disk/by-uuid/6b6700e6-e806-4cf9-bdb3-4896318ae444";
+# -------- 
       fsType = "btrfs";
       options = [ "subvol=@" ];
     };
 
   fileSystems."/home" =
+# 600G4
+#   { device = "/dev/disk/by-uuid/d325e226-2824-4d85-a4f9-5e6af3697699";
+# -----
+# QEMU/KVM 
     { device = "/dev/disk/by-uuid/6b6700e6-e806-4cf9-bdb3-4896318ae444";
+# -------- 
       fsType = "btrfs";
       options = [ "subvol=@home" ];
     };
 
+  fileSystems."/nix" =
+# 600G4
+#   { device = "/dev/disk/by-uuid/d325e226-2824-4d85-a4f9-5e6af3697699";
+# -----
+# QEMU/KVM 
+    { device = "/dev/disk/by-uuid/6b6700e6-e806-4cf9-bdb3-4896318ae444";
+# -------- 
+      fsType = "btrfs";
+      options = [ "subvol=@nix" ];
+    };
+
   fileSystems."/boot" =
+# 600G4
+#   { device = "/dev/disk/by-uuid/8280-0A6A";
+# -----
+# QEMU/KVM 
     { device = "/dev/disk/by-uuid/C08A-5289";
+# -------- 
       fsType = "vfat";
       options = [ "fmask=0077" "dmask=0077" ];
     };
@@ -34,4 +79,7 @@
   swapDevices = [ ];
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
+# 600G4
+# hardware.cpu.intel.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+# -----
 }
