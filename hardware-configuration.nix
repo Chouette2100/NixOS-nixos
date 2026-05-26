@@ -25,11 +25,6 @@ in
   boot.kernelModules = [ "kvm-intel" ];
   boot.extraModulePackages = [ ];
 
-# fileSystems."/tmp" =
-#   { device = "/dev/disk/by-uuid/2af9c009-cd0e-4d9f-9319-e33e20ba2962";
-#     fsType = "btrfs";
-#   };
-
   fileSystems."/" =
     { device = 
         if isQemu then

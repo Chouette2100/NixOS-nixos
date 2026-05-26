@@ -20,10 +20,6 @@
       options = "--delete-older-than 7d";
     };
   };
-
-# boot.loader.grub.enable = true;
-# boot.loader.grub.device = "/dev/vda";
-# boot.loader.grub.useOSProber = true;
   
   # Bootloader.
   boot.loader.systemd-boot.enable = true;

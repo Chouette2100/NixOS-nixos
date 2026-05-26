@@ -23,7 +23,6 @@ in
   # ユーザー設定
   users.users.chouette = {
     isNormalUser = true;
-  # homeMode = "0755"; # ここでパーミッションを指定できます
     uid = 1001;
     description = "Chouette2100";
     extraGroups = [ "networkmanager" "wheel" "incus-admin" ];
@@ -31,19 +30,6 @@ in
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIESoXUKQ+RNr/bJ99H09filTh0Xfh4E8/oK4kIV5KOeq chouette@600G4Mint"
     ];
   };
-
-# users.users.ubuntu = {
-#   isNormalUser = true;
-# # homeMode = "0755"; # ここでパーミッションを指定できます
-#   uid = 1000;
-#   description = "ubuntu";
-#   extraGroups = [ "networkmanager" "wheel" ];
-#   shell = pkgs.bashInteractive;
-#   initialHashedPassword = "$6$LJ25W5RoVYzQDw7E$1.Y8737sC0yDFLpQ53wkMg1ZTD0/WCdg4NoqTzLxZlePk2x.XVAcjhvKY.Gs3LC2K3DHU8nkAXKDkCEhfuyzF.";
-#   openssh.authorizedKeys.keys = [
-#     "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIESoXUKQ+RNr/bJ99H09filTh0Xfh4E8/oK4kIV5KOeq chouette@600G4Mint"
-#   ];
-# };
 
   # システムパッケージ
   environment.systemPackages = with pkgs; [
@@ -65,8 +51,6 @@ in
     lsof
     google-chrome
     terminator
-#   neovim
-#   vimPlugins.LazyVim
   ] ++ lib.optionals isQemu [
     spice-vdagent
     nfs-utils

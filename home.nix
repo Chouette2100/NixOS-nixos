@@ -10,13 +10,8 @@
   home.file = {
     ".ssh/id_ed25519.pub" = {
       source = ./secrets/id_ed25519.pub;
-      force = true;  # 追加
+      force = true;
     };
-#   ".ssh/authorized_keys" = {
-#     source = ./secrets/authorized_keys;
-#     force = true;  # 追加
-#   };
-    # SSH設定ファイル（textを使用）
     ".ssh/config" = {
       text = ''
       Host github.com
@@ -24,10 +19,6 @@
         User git
         IdentityFile ~/.ssh/id_ed25519
         IdentitiesOnly yes
-#   
-#     Host *
-#       AddKeysToAgent yes
-#       UseKeychain yes
       '';
       force = true;
     };
@@ -44,11 +35,7 @@
           -o "${config.home.homeDirectory}/.ssh/id_ed25519" \
           "${config.home.homeDirectory}/NixOS-nixos/secrets/id_ed25519.age"
         
-        # パーミッションを設定
-        # 秘密鍵の権限
         chmod 600 "${config.home.homeDirectory}/.ssh/id_ed25519"
-        # 公開鍵の権限（念のため）
-        # chmod 644 "${config.home.homeDirectory}/.ssh/id_ed25519.pub"
 
         echo "SSH private key decrypted successfully"
       else
@@ -59,36 +46,15 @@
     '';
   };
 
-# # SSH設定ファイル（textを使用）
-# xdg.configFile= {
-#   "ssh/config" = {
-#     text = ''
-#       Host github.com
-#         HostName github.com
-#         User git
-#         IdentityFile ~/.ssh/id_ed25519
-#         IdentitiesOnly yes
-#       
-#       Host *
-#         AddKeysToAgent yes
-#         UseKeychain yes
-#       '';
-#     force = true;
-#   };
-# };
-
   # 権限設定
   systemd.user.tmpfiles.rules = [
     "f /home/chouette/.ssh/id_ed25519 0600 - - - -"
     "f /home/chouette/.ssh/config 0600 - - - -"
   ];
 
-  # vscode
-  # id=4408   modelname=gemini-3-flash-preview   maxtokens=20000   [26-05-24 10:56 ( 10.3s)]
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
-    # profiles.default を追加し、その中に extensions を移動します
     profiles.default = {
       extensions = with pkgs.vscode-extensions; [
         golang.go
@@ -96,12 +62,8 @@
         ms-ceintl.vscode-language-pack-ja
         vscodevim.vim
       ];
-      # もし userSettings などがあれば、それもここ（profiles.default内）に移動できます
     };
   };
-
-  # ユーザーセッションで spice-vdagent を自動起動
-  # service.spice-vdagent.enable = true;
 
   # Git設定
   programs.git = {
@@ -117,7 +79,7 @@
   # SSHエージェント
   programs.ssh = {
     enable = true;
-    enableDefaultConfig = false;  # 追加
+    enableDefaultConfig = false;
     matchBlocks = {
       "*" = {
         forwardAgent = true;
@@ -173,19 +135,14 @@ systemd.user.services.dropbox-mount = {
 
   Service = {
     Type = "simple";
-    # --daemon フラグを削除し、フォアグラウンドで実行させる
     ExecStart = ''
       ${pkgs.rclone}/bin/rclone mount dropbox: %h/Dropbox \
         --config=/home/chouette/.config/rclone/rclone.conf \
         --vfs-cache-mode writes
-    #   --vfs-cache-mode writes \
-    #   --nomsgbuf
     '';
-    # 終了時に確実にアンマウントする
     ExecStop = "/run/current-system/sw/bin/fusermount -u /home/chouette/Dropbox";
     Restart = "on-failure";
     RestartSec = "10s";
-    # マウントポイントが存在しない場合に備えて作成する（必要に応じて）
     ExecStartPre = "/run/current-system/sw/bin/mkdir -p /home/chouette/Dropbox";
   };
 
