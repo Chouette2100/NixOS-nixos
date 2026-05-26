@@ -1,6 +1,9 @@
 # /etc/nixos/configuration.nix
-{ config, pkgs, ... }:
+{ config, lib, pkgs, machineType ? "qemu", ... }:
 
+let
+  isQemu = machineType == "qemu";
+in
 {
   imports = [
     ./modules/desktop.nix
@@ -10,19 +13,13 @@
     ./modules/service.nix
   ];
 
-  # SPICE ゲストエージェントサービスを有効化
-# services.qemuGuest.enable = true;
-  services.spice-vdagentd.enable = true;
+  # QEMU/KVM
+  services.spice-vdagentd.enable = isQemu;
 
   # 必要に応じて SPICE 対応のグラフィックドライバを追加（QXL など）
   # QXL ドライバを使用する場合（virt-viewer などから接続）
-  boot.kernelParams = [ "video=2560x1440@60" ]; # 解像度指定は任意
-  services.xserver.videoDrivers = [ "qxl" ];   # X11 の場合
-
-# # パッケージはサービスが自動的に追加するが、明示したい場合
-# environment.systemPackages = with pkgs; [
-#   spice-vdagent
-# ];
+  boot.kernelParams = lib.optionals isQemu [ "video=2560x1440@60" ];
+  services.xserver.videoDrivers = lib.optionals isQemu [ "qxl" ];
 
   # ユーザー設定
   users.users.chouette = {
@@ -51,7 +48,6 @@
 
   # システムパッケージ
   environment.systemPackages = with pkgs; [
-    spice-vdagent
     rclone
     vim
     git
@@ -69,9 +65,13 @@
 #   vscode
 #   neovim
 #   vimPlugins.LazyVim
+  ] ++ lib.optionals isQemu [
+    spice-vdagent
+    nfs-utils
   ];
 
-environment.etc."xdg/autostart/spice-vdagent.desktop".text = ''
+  environment.etc."xdg/autostart/spice-vdagent.desktop" = lib.mkIf isQemu {
+    text = ''
   [Desktop Entry]
   Name=Spice vdagent
   Exec=spice-vdagent
@@ -79,6 +79,7 @@ environment.etc."xdg/autostart/spice-vdagent.desktop".text = ''
   X-GNOME-Autostart-enabled=true
   NoDisplay=true
 '';
+  };
 
   # SSHサーバー設定
   services.openssh = {

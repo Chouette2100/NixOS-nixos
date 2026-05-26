@@ -1,12 +1,15 @@
 # /etc/nixos/modules/networking.nix
-{ config, pkgs, ... }:
+{ config, lib, pkgs, machineType ? "qemu", ... }:
 
+let
+  isQemu = machineType == "qemu";
+in
 {
   networking.networkmanager.enable = true;
   networking.nftables.enable = true;
   
-  # NFSマウント
-  fileSystems."/mnt/nfsh" = {
+  # QEMU/KVM
+  fileSystems."/mnt/nfsh" = lib.mkIf isQemu {
     device = "192.168.0.13:/mnt/lxddefault/custom/default_samba";
     fsType = "nfs";
     options = [
