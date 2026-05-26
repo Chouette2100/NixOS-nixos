@@ -165,5 +165,12 @@ systemd.user.services.dropbox-mount = {
     curl
     unzip
     jq
+  # 元の google-chrome を上書きする
+  (google-chrome.overrideAttrs (old: {
+    installPhase = old.installPhase + ''
+      wrapProgram $out/bin/google-chrome-stable \
+        --add-flags "--ozone-platform=wayland --enable-wayland-ime"
+    '';
+  }))
   ];
 }
