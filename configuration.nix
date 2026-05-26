@@ -5,6 +5,8 @@ let
   isQemu = machineType == "qemu";
 in
 {
+  nixpkgs.config.allowUnfree = true;
+
   imports = [
     ./modules/desktop.nix
     ./modules/containers.nix
@@ -49,7 +51,9 @@ in
     vim
     git
     htop
+    btop
     distrobox
+    nfs-utils
     age  # ageをシステムにインストール
     openssl
     librecad
@@ -59,7 +63,8 @@ in
     obsidian
     go
     lsof
-#   vscode
+    google-chrome
+    terminator
 #   neovim
 #   vimPlugins.LazyVim
   ] ++ lib.optionals isQemu [

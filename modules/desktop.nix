@@ -1,8 +1,39 @@
 # /etc/nixos/modules/desktop.nix
-{ config, pkgs, lib, ... }:
+{ config, lib, pkgs, machineType ? "qemu", ... }:
+
+let
+  isQemu = machineType == "qemu";
+  isBaremetal = machineType == "baremetal";
+in
 
 {
   services.xserver.enable = true;
+
+  # 2. X11/WaylandでNVIDIAドライバを使用するように設定
+  services.xserver.videoDrivers = [ "nvidia" ];
+
+hardware = lib.mkIf isBaremetal
+{
+  # 3. グラフィックス機能を有効化
+  # (NixOS 24.05以降は hardware.graphics.enable です。古いバージョンなら opengl.enable)
+  graphics.enable = true;
+
+  # 4. NVIDIA固有の設定
+  nvidia = {
+    # モードセッティングを有効化（Wayland/KDE Plasma 6で必須）
+    modesetting.enable = true;
+
+    # 電源管理（サスペンド等で問題が出る場合は有効にする）
+    powerManagement.enable = false;
+
+    # プロプライエタリなドライバを使用
+    open = false; # GT 1030 (Pascal) は新しいオープンソースドライバ非対応のため false
+
+    # ドライバのバージョン指定（通常は stable でOK）
+    package = config.boot.kernelPackages.nvidiaPackages.stable;
+  };
+};
+
 
 # services.xserver.displayManager.lightdm.enable = true;
 
