@@ -31,6 +31,13 @@ in
   # KDEのシステム設定 → 入力デバイス → キーボード → レイアウトを開き、  
   # もしUSだけなら、下の「追加」から日本語を加え、USを削除するか優先度を下げる
   # タスクバーのキーボード配列が（USではなく）JPになっているのが正常
+  # さらにvscode+vscodevimの場合は
+  #     $ code --ozone-platform=x11
+  # と起動した上で
+  #     Preferences: Open User Settings (JSON)
+  # にある editor.editContext のチェックをはずす。
+  
+  # タスクバー上のキーボードとキーボード配列の表示にはつねに注意する
 
   services.xserver.xkb = {
     layout = "jp";
