@@ -24,6 +24,14 @@ in
   services.displayManager.sddm.enable = true;
   services.desktopManager.plasma6.enable = true;
 
+  # id=4451   modelname=deepseek-v4-pro   maxtokens=20000   [26-05-27 09:19 ( 41.1s)]
+  # キーボードがUSであると半角/全角キーで「&#x60;」が出る
+  # JP106配列なら半角/全角キーは別のキーコードを送る
+  # 半角/全角キーで「&#x60;」が出るのであればキーボードがUSのはず
+  # KDEのシステム設定 → 入力デバイス → キーボード → レイアウトを開き、  
+  # もしUSだけなら、下の「追加」から日本語を加え、USを削除するか優先度を下げる
+  # タスクバーのキーボード配列が（USではなく）JPになっているのが正常
+
   services.xserver.xkb = {
     layout = "jp";
     model = "jp106";
