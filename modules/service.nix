@@ -41,11 +41,15 @@ systemd.services.ssh-tunnel-kagoya = {
   wants = [ "network-online.target" ];
   wantedBy = [ "multi-user.target" ]; # これでログイン不要で起動
 
+  # SSHトンネル設定
+  # ローカル:9910 → リモートMySQL (127.0.0.1:3306)
+  # ローカル:9384 → リモートSyncthing (127.0.0.1:8384)
   serviceConfig = {
     User = "chouette"; # 既存のSSH鍵を持つユーザー
     ExecStart = ''
       ${pkgs.openssh}/bin/ssh -p 9978 -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -N \
         -L 9910:127.0.0.1:3306 \
+        -L 9384:127.0.0.1:8384 \
         chouette@133.18.160.207
     '';
     Restart = "always";
