@@ -8,6 +8,24 @@ in
   networking.networkmanager.enable = true;
   networking.networkmanager.insertNameservers = [ "192.168.0.24" ];
   networking.nameservers = [ "192.168.0.24" ];
+  networking.networkmanager.ensureProfiles.profiles."wired-eno1" = {
+    connection = {
+      id = "有線接続 1";
+      type = "802-3-ethernet";
+      interface-name = "eno1";
+      uuid = "99e03e99-129f-39c9-a1df-6656eade4e6d";
+      autoconnect = true;
+    };
+    ipv4 = {
+      method = "auto";
+      ignore-auto-dns = true;
+      dns = "192.168.0.24;";
+    };
+    ipv6 = {
+      method = "auto";
+      ignore-auto-dns = true;
+    };
+  };
   networking.nftables.enable = true;
   networking.hosts = {
     "192.168.0.13" = [ "Mint221BE" ];
