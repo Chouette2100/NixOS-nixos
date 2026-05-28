@@ -7,6 +7,7 @@ in
 {
   networking.networkmanager.enable = true;
   networking.networkmanager.insertNameservers = [ "192.168.0.24" ];
+  networking.nameservers = [ "192.168.0.24" ];
   networking.nftables.enable = true;
   networking.hosts = {
     "192.168.0.13" = [ "Mint221BE" ];
