@@ -7,6 +7,8 @@ in
 {
   nixpkgs.config.allowUnfree = true;
 
+  # hardware.enableAllFirmware = true; # for Bluetooth
+
   imports = [
     ./modules/desktop.nix
     ./modules/containers.nix

@@ -64,6 +64,38 @@
     SDL_IM_MODULE = "fcitx";
   };
 
+    # Bluetooth ハードウェアを有効化
+  hardware.bluetooth = {
+    enable = true;
+    powerOnBoot = true; # 起動時に自動でオンにする
+    settings = {
+      General = {
+        # A2DPなどのプロファイルを有効化
+        Enable = "Source,Sink,Media,Socket";
+        # 一部のヘッドセットで接続を安定させる設定
+        Experimental = true;
+      };
+    };
+  };
+
+  # オーディオシステム（PipeWire 推奨）
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    # Bluetoothオーディオの有効化
+    wireplumber.enable = true;
+  };
+
+  # PulseAudio が起動していないことを確認
+  # hardware.pulseaudio.enable = false;
+
+  # （任意）Bluetooth 管理をユーザーに許可するポリシー
+  # 通常はデフォルトで大丈夫ですが、必要なら以下を追加
+  # security.polkit.enable = true;
+
+
   nixpkgs.config.allowUnfree = true;
 }
 
