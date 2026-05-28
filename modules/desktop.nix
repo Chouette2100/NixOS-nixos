@@ -36,6 +36,7 @@ in
   # と起動した上で
   #     Preferences: Open User Settings (JSON)
   # にある editor.editContext のチェックをはずす。
+  # "editor.editContext": false  がsetig.jsonに追加される（追加する）
   
   # タスクバー上のキーボードとキーボード配列の表示にはつねに注意する
 
