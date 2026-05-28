@@ -4,6 +4,8 @@
 
 この構成では、LAN 内の `dnsmasq` サーバー `192.168.0.24` を名前解決の参照先として使います。
 
+詳細な作業経緯は `docs/dnsmasq-networkmanager-memo.md` にまとめています。
+
 ### 目的
 
 - LAN 内ホスト名を `dnsmasq` でまとめて引けるようにする
