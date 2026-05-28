@@ -126,6 +126,17 @@
     LockOnStartup=false
   '';
 
+  xdg.configFile."kxkbrc".text = ''
+    [Layout]
+    DisplayNames=,
+    LayoutList=jp,us
+    Model=jp106
+    Options=
+    ResetOldOptions=true
+    Use=true
+    VariantList=,
+  '';
+
 systemd.user.services.dropbox-mount = {
   Unit = {
     Description = "Dropbox mount (rclone)";
