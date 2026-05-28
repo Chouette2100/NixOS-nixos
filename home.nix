@@ -54,7 +54,12 @@
 
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode;
+    package = pkgs.vscode.overrideAttrs (old: {
+      postFixup = (old.postFixup or "") + ''
+        wrapProgram $out/bin/code \
+          --add-flags "--ozone-platform=x11"
+      '';
+    });
     profiles.default = {
       extensions = with pkgs.vscode-extensions; [
         golang.go
