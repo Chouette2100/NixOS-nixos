@@ -142,6 +142,16 @@
     VariantList=,
   '';
 
+  xdg.configFile."autostart/setxkbmap-jp.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=Set XKB to JP106
+    Exec=${pkgs.xorg.setxkbmap}/bin/setxkbmap -model jp106 -layout jp
+    X-GNOME-Autostart-enabled=true
+    X-KDE-autostart-after=panel
+    NoDisplay=true
+  '';
+
 systemd.user.services.dropbox-mount = {
   Unit = {
     Description = "Dropbox mount (rclone)";
