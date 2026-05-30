@@ -40,6 +40,8 @@ in
     git
     htop
     btop
+    # id=4486   modelname=gemini-3-flash-preview   maxtokens=20000   [26-05-30 21:32 ( 13.3s)]
+    nvtopPackages.full
     distrobox
     nfs-utils
     age  # ageをシステムにインストール
