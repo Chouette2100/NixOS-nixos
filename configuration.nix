@@ -52,6 +52,14 @@ in
     joplin-desktop
     obsidian
     go
+    gopls
+    delve
+    golangci-lint
+  # staticcheck
+    gotools     # goimports など
+    impl
+    gomodifytags
+    go-outline
     pciutils  # lspci
     usbutils  # lsusb (ついでにあると便利)
     lsof

@@ -67,6 +67,18 @@
         ms-ceintl.vscode-language-pack-ja
         vscodevim.vim
       ];
+      userSettings = {
+        "go.toolsManagement.autoUpdate" = false;
+        "go.alternateTools" = {
+          "gopls" = "/run/current-system/sw/bin/gopls";
+          "dlv" = "/run/current-system/sw/bin/dlv";
+        };
+        # 以下、必要に応じて他の設定
+        "git.autofetch" = true;
+        "github.copilot.nextEditSuggestions.enabled" = true;
+        "editor.editContext" = false;
+        "files.autoSave" = "afterDelay";
+      };
     };
   };
 
