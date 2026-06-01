@@ -52,9 +52,13 @@ in
     joplin-desktop
     obsidian
     go
+    pciutils  # lspci
+    usbutils  # lsusb (ついでにあると便利)
     lsof
     google-chrome
     terminator
+    sticky
+  # mysql-workbench
   ] ++ lib.optionals isQemu [
     spice-vdagent
     nfs-utils
