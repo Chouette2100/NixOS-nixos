@@ -50,6 +50,7 @@ systemd.services.ssh-tunnel-kagoya = {
       ${pkgs.openssh}/bin/ssh -p 9978 -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -N \
         -L 9910:127.0.0.1:3306 \
         -L 9384:127.0.0.1:8384 \
+        -R 8008:localhost:8008 \
         chouette@133.18.160.207
     '';
     Restart = "always";
