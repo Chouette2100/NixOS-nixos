@@ -1,10 +1,13 @@
 # /etc/nixos/flake.nix
+# $ vi flake.nix     ...   inputs.nixpkgs.urlを変更する
+# $ nix flake update
+# $ sudo nixos-rebuild switch --flake .
 {
   description = "My NixOS Configuration with age-encrypted secrets";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.11";
-    home-manager.url = "github:nix-community/home-manager/release-25.11";
+    home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
   };
 
