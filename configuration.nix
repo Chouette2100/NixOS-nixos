@@ -15,6 +15,7 @@ in
     ./modules/networking.nix
     ./modules/system.nix
     ./modules/service.nix
+    ./modules/filesystems.nix
   ];
 
   # QEMU/KVM専用設定（SPICE / QXL）
@@ -32,6 +33,8 @@ in
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIESoXUKQ+RNr/bJ99H09filTh0Xfh4E8/oK4kIV5KOeq chouette@600G4Mint"
     ];
   };
+
+  programs.steam.enable = true; 
 
   # システムパッケージ
   environment.systemPackages = with pkgs; [
