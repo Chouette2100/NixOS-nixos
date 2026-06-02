@@ -65,8 +65,10 @@ in
     lsof
     google-chrome
     terminator
-    sticky
-  # mysql-workbench
+    # sticky
+    sticky-notes
+    dbeaver-bin
+    # mysql-workbench
   ] ++ lib.optionals isQemu [
     spice-vdagent
     nfs-utils
