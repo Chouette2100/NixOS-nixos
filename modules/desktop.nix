@@ -1,5 +1,5 @@
 # /etc/nixos/modules/desktop.nix
-{ config, lib, pkgs, machineType ? "qemu", ... }:
+{ config, lib, pkgs, machineType ? "qemu", pkgs-nvidia, ... }:
 
 let
   isBaremetal = machineType == "baremetal";
@@ -24,18 +24,22 @@ in
       modesetting.enable = true;
       powerManagement.enable = false;
       open = false;
-      package = config.boot.kernelPackages.nvidiaPackages.stable;
+      # package = config.boot.kernelPackages.nvidiaPackages.stable;
+      # package = pkgs-nvidia.linuxPackages.nvidiaPackages.stable;
+      # package = config.boot.kernelPackages.nvidiaPackages.production;
+      # package = config.boot.kernelPackages.nvidiaPackages.legacy_550;
+      package = config.boot.kernelPackages.nvidiaPackages.legacy_580;
 
-      # PRIME設定の追加
-      prime = {
-        # 同期モード（NVIDIAを常にメインにする場合）
-        sync.enable = true;
+    # # PRIME設定の追加
+    # prime = {
+    #   # 同期モード（NVIDIAを常にメインにする場合）
+    #   sync.enable = true;
 
-        # バスIDの指定（重要：環境に合わせて書き換えてください）
-        # コマンド `lspci | grep -E "VGA|3D"` で確認できます
-        intelBusId = "PCI:0:2:0";   # 例: 00:02.0 の場合
-        nvidiaBusId = "PCI:1:0:0";  # 例: 01:00.0 の場合
-      };
+    #   # バスIDの指定（重要：環境に合わせて書き換えてください）
+    #   # コマンド `lspci | grep -E "VGA|3D"` で確認できます
+    #   intelBusId = "PCI:0:2:0";   # 例: 00:02.0 の場合
+    #   nvidiaBusId = "PCI:1:0:0";  # 例: 01:00.0 の場合
+    # };
     };
 
   };
