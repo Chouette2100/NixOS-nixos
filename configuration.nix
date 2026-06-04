@@ -39,13 +39,15 @@ in
   # システムパッケージ
   environment.systemPackages = with pkgs; [
     rclone
+    fish
     vim
     git
     htop
     btop
     # id=4486   modelname=gemini-3-flash-preview   maxtokens=20000   [26-05-30 21:32 ( 13.3s)]
     nvtopPackages.full
-    distrobox
+    # distrobox
+    # podman
     nfs-utils
     age  # ageをシステムにインストール
     openssl
