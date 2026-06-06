@@ -28,7 +28,12 @@
       fsType = "btrfs";
       options = [ "bind" ];
     };
-    "/kvm" = {
+    "/home/chouette/Downloads" = {
+      device = "/mnt/nfsh/custom/default_samba/Downloads";
+      fsType = "btrfs";
+      options = [ "bind" ];
+    };
+    "/mnt/kvm" = {
       device = "/dev/disk/by-uuid/a8b6d806-1997-4e79-a615-fd87db5de7f6";
       fsType = "btrfs";
       options = [ "subvol=@kvm" ];

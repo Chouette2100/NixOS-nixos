@@ -19,15 +19,17 @@ in
   ];
 
   # QEMU/KVM専用設定（SPICE / QXL）
-  services.spice-vdagentd.enable = isQemu;
+  # services.spice-vdagentd.enable = isQemu; # ==> modules/containers.nix
   boot.kernelParams = lib.optionals isQemu [ "video=2560x1440@60" ];
   services.xserver.videoDrivers = lib.optionals isQemu [ "qxl" ];
 
   # ユーザー設定
+  users.groups.chouette = {};
   users.users.chouette = {
     isNormalUser = true;
     uid = 1001;
     description = "Chouette2100";
+    group = "chouette";
     extraGroups = [ "networkmanager" "wheel" "incus-admin" ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIESoXUKQ+RNr/bJ99H09filTh0Xfh4E8/oK4kIV5KOeq chouette@600G4Mint"
