@@ -80,6 +80,14 @@
     };
   };
 
+  # Incusのブリッジインターフェースを信頼する
+  networking.firewall.trustedInterfaces = [ "incusbr0" ];
+  
+  # もしnftablesを使用している場合は、以下も検討
+  # networking.firewall.extraCommands = ''
+  #   iptables -A INPUT -i incusbr0 -p udp --dport 67 -j ACCEPT
+  # '';
+
 # QEMU/KVM
   # libvirtd デーモン + QEMU/KVM を有効化
   virtualisation.libvirtd.enable = true;
