@@ -23,6 +23,15 @@
       device = "/dev/disk/by-uuid/4121b09e-5d5d-40ce-8e94-1cba91340963";
       fsType = "btrfs";
     };
+    "/mnt/lxddefault" = {
+      device = "/dev/disk/by-uuid/4121b09e-5d5d-40ce-8e94-1cba91340963";
+      fsType = "btrfs";
+      options = [
+        "subvolid=5"      # パーティションのルートをマウントする場合
+        "compress=zstd"   # Btrfsの圧縮を有効にする場合（推奨）
+        "noatime" 
+      ];
+    };
     "/home/chouette/go" = {
       device = "/mnt/nfsh/custom/default_samba/go";
       fsType = "btrfs";
@@ -30,6 +39,11 @@
     };
     "/home/chouette/Downloads" = {
       device = "/mnt/nfsh/custom/default_samba/Downloads";
+      fsType = "btrfs";
+      options = [ "bind" ];
+    };
+    "/home/chouette/Documents" = {
+      device = "/mnt/nfsh/custom/default_samba/Documents";
       fsType = "btrfs";
       options = [ "bind" ];
     };

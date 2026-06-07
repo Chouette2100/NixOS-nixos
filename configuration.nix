@@ -12,6 +12,7 @@ in
   imports = [
     ./modules/desktop.nix
     ./modules/containers.nix
+    ./modules/qemukvm.nix
     ./modules/networking.nix
     ./modules/system.nix
     ./modules/service.nix
