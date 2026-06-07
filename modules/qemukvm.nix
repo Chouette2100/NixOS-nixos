@@ -12,11 +12,11 @@
       package = pkgs.qemu_kvm;
       runAsRoot = true;
       swtpm.enable = true;
-      ovmf = {
-        enable = true;
-        # セキュアブート対応のフル機能版OVMFを使用
-        packages = [ pkgs.OVMFFull.fd ];
-      };
+    # ovmf = {
+    #   enable = true;
+    #   # セキュアブート対応のフル機能版OVMFを使用
+    #   packages = [ pkgs.OVMFFull ];
+    # };
     };
   };
 
@@ -27,13 +27,17 @@
     # virt-manager
     virt-viewer
     spice-gtk
-    win-virtio
+  # win-virtio
+    virtio-win
     swtpm
   ];
 # -------------------------------------------------------------------------------------------
 
   # GUI (virt-manager) を有効化 (libvirtd や polkit も自動で設定)
   programs.virt-manager.enable = true;
+
+  networking.firewall.trustedInterfaces = [ "virbr0" ];
+  
 
   # 任意: UEFI ブート用 OVMF ファームウェア
   # virtualisation.libvirtd.qemu.ovmf.enable = true;
