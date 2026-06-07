@@ -69,6 +69,7 @@
       ];
       userSettings = {
         "go.toolsManagement.autoUpdate" = false;
+        "diffEditor.ignoreTrimWhitespace" = false;
         "go.alternateTools" = {
           "gopls" = "/run/current-system/sw/bin/gopls";
           "dlv" = "/run/current-system/sw/bin/dlv";
