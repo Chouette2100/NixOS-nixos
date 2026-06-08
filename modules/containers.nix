@@ -3,7 +3,6 @@
 
 {
 
-  # distrobox -------------------
   # コンテナの基本設定を有効化
   # （これにより /etc/containers/policy.json などが自動生成されます）
   virtualisation.containers.enable = true;
@@ -17,6 +16,14 @@
     
     # コンテナ間のDNS名前解決を有効化（推奨）
     defaultNetwork.settings.dns_enabled = true;
+  };
+
+  # ユーザー chouette に対して SubUID/SubGID を割り当てる
+  users.users.chouette = {
+    isNormalUser = true;
+    extraGroups = [ "wheel" "podman" ]; # podmanグループが必要
+    subUidRanges = [{ startUid = 100000; count = 65536; }];
+    subGidRanges = [{ startGid = 100000; count = 65536; }];
   };
 
   # コンテナ内でNVIDIA GPUを使用するための設定
@@ -34,7 +41,7 @@
 #   dockerCompat = true;
 # };
 
-# incus -----------------------------
+# incus
   virtualisation.incus = {
     enable = true;
     # 初回起動時に自動設定を行う（incus admin init の代わり）
