@@ -16,11 +16,12 @@
       text = ''
       Host github.com
         HostName github.com
+        Port 22
         User git
-        IdentityFile ~/.ssh/id_ed25519
-        IdentitiesOnly yes
       Host *
         Port 9978
+        IdentityFile ~/.ssh/id_ed25519
+        IdentitiesOnly yes
         ServerAliveInterval 60
         ServerAliveCountMax 3
       '';
