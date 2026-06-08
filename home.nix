@@ -19,6 +19,10 @@
         User git
         IdentityFile ~/.ssh/id_ed25519
         IdentitiesOnly yes
+      Host *
+        Port 9978
+        ServerAliveInterval 60
+        ServerAliveCountMax 3
       '';
       force = true;
     };
@@ -163,6 +167,18 @@
     X-GNOME-Autostart-enabled=true
     X-KDE-autostart-after=panel
     NoDisplay=true
+  '';
+
+  # terminator
+  xdg.configFile."autostart/terminator.desktop".text = ''
+    [Desktop Entry]
+    Type=Application
+    Name=Terminator Autostart
+    Comment=Start terminator with specific layout
+    Exec=terminator --layout=new
+    Terminal=false
+    Categories=System;TerminalEmulator;
+    X-GNOME-Autostart-enabled=true
   '';
 
 systemd.user.services.dropbox-mount = {
