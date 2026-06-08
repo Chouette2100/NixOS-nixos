@@ -47,6 +47,11 @@
       fsType = "btrfs";
       options = [ "bind" ];
     };
+    "/home/chouette/Pictures" = {
+      device = "/mnt/nfsh/custom/default_samba/Pictures";
+      fsType = "btrfs";
+      options = [ "bind" ];
+    };
     "/mnt/kvm" = {
       device = "/dev/disk/by-uuid/a8b6d806-1997-4e79-a615-fd87db5de7f6";
       fsType = "btrfs";

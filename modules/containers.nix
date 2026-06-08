@@ -96,4 +96,27 @@
   #   iptables -A INPUT -i incusbr0 -p udp --dport 67 -j ACCEPT
   # '';
 
+  fonts = {
+    packages = with pkgs; [
+      noto-fonts-cjk-sans
+      noto-fonts-cjk-serif
+      hackgen-nf-font      # HackGen
+      moralerspace         # Moralerspace
+      udev-gothic-nf       # UDEV Gothic
+    ];
+
+    fontconfig = {
+      defaultFonts = {
+      # monospace = [ "HackGen Console NF" "Noto Sans Mono CJK JP" ];
+        monospace = [ "Moralerspace Xenon" ];
+        sansSerif = [ "Noto Sans CJK JP" ];
+        serif = [ "Noto Serif CJK JP" ];
+      };
+      # Macに近い「アンチエイリアス重視」の設定
+      antialias = true;
+      hinting.enable = false; # あえてヒンティングをオフにするとMacっぽくなります
+    };
+  };
+
+
 }
