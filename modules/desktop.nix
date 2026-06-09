@@ -12,6 +12,7 @@ in
 
   hardware = lib.mkIf isBaremetal {
     graphics.enable = true;
+    graphics.enable32Bit = true; # for Bottles/LINE
 
   # nvidia = {
   #   modesetting.enable = true;

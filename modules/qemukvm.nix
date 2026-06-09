@@ -37,6 +37,9 @@
   programs.virt-manager.enable = true;
 
   networking.firewall.trustedInterfaces = [ "virbr0" ];
+
+  # ネットワークのブリッジ通信を許可するための設定（重要）
+  networking.firewall.checkReversePath = false;
   
 
   # 任意: UEFI ブート用 OVMF ファームウェア

@@ -37,6 +37,9 @@ in
     ];
   };
 
+# networking.firewall.enable = false; # test of LINE
+
+  services.flatpak.enable = true;
   programs.steam.enable = true; 
 
   # システムパッケージ
@@ -73,6 +76,8 @@ in
     lsof
     google-chrome
     terminator
+    keepassxc
+    # bottles  # Wine環境をGUIで管理するツール
     # sticky
     sticky-notes
     dbeaver-bin
