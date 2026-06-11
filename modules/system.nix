@@ -95,6 +95,10 @@
   # 通常はデフォルトで大丈夫ですが、必要なら以下を追加
   # security.polkit.enable = true;
 
+  # gnome-keyring を有効にする((distroboxの)mysql-workbench用)
+    services.gnome.gnome-keyring.enable = true;
+    security.pam.services.login.enableGnomeKeyring = true; # ログイン時に自動解錠
+
 
   nixpkgs.config.allowUnfree = true;
 }

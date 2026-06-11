@@ -81,7 +81,7 @@ in
     # sticky
     sticky-notes
     dbeaver-bin
-    # mysql-workbench
+    # mysql-workbench # /usr/sbin/mysqld  Ver 8.0.45-0ubuntu0.24.04.1に対応していない
   ] ++ lib.optionals isQemu [
     spice-vdagent
     nfs-utils
