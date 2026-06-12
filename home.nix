@@ -210,6 +210,17 @@ systemd.user.services.dropbox-mount = {
 
   # 便利なパッケージ
   home.packages = with pkgs; [
+    # オフィス
+    libreoffice-fresh
+    hunspell        # スペルチェック
+    hunspellDicts.en_US
+    pdfarranger
+    
+    # クリエイティブ
+    gimp
+    inkscape
+    vlc             # 動画再生
+
     neovim
     tmux
     htop

@@ -82,6 +82,8 @@ in
     sticky-notes
     dbeaver-bin
     # mysql-workbench # /usr/sbin/mysqld  Ver 8.0.45-0ubuntu0.24.04.1に対応していない
+    # wineWowPackages.stable # 64bitおよび32bit環境をサポートする安定版
+    # winetricks             # 各種ライブラリ導入ツール（必要に応じて）
   ] ++ lib.optionals isQemu [
     spice-vdagent
     nfs-utils
