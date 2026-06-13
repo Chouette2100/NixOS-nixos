@@ -13,13 +13,21 @@
 
     home-manager.url = "github:nix-community/home-manager/release-26.05";
     home-manager.inputs.nixpkgs.follows = "nixpkgs";
+
+    # nixvimを追加
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
   };
 
-  outputs = { self, nixpkgs, home-manager, nixpkgs-nvidia-legacy, ... }@inputs:
+  outputs = { self, nixpkgs, home-manager, nixvim, nixpkgs-nvidia-legacy, ... }@inputs:
     let
       mkNixosConfig = machineType: nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
+          inherit inputs.nixvim;
           inherit machineType;
           # 580系ドライバを持つpkgsを個別に作成して渡す
           pkgs-nvidia = import nixpkgs-nvidia-legacy {
