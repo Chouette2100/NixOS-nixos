@@ -27,7 +27,6 @@
       mkNixosConfig = machineType: nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         specialArgs = {
-          inherit inputs.nixvim;
           inherit machineType;
           # 580系ドライバを持つpkgsを個別に作成して渡す
           pkgs-nvidia = import nixpkgs-nvidia-legacy {

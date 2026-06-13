@@ -6,6 +6,10 @@
   home.username = "chouette";
   home.homeDirectory = "/home/chouette";
 
+  imports = [
+    ./modules/neovim.nix
+  ];
+
   # SSH鍵の設定（sourceを使用）
   home.file = {
     ".ssh/id_ed25519.pub" = {
@@ -221,7 +225,7 @@ systemd.user.services.dropbox-mount = {
     inkscape
     vlc             # 動画再生
 
-    neovim
+    # neovim
     tmux
     htop
     tree
