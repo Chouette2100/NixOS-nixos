@@ -69,12 +69,36 @@
 
     # キーマップ設定
     keymaps = [
+
+      #   ウィンドウ移動を Ctrl + hjkl に割り当てる
+      { mode = "n"; key = "<C-h>"; action = "<C-w>h"; }
+      { mode = "n"; key = "<C-j>"; action = "<C-w>j"; }
+      { mode = "n"; key = "<C-k>"; action = "<C-w>k"; }
+      { mode = "n"; key = "<C-l>"; action = "<C-w>l"; }
+
+      #  ウィンドウサイズ変更を Alt + 矢印 に割り当てる
+      { mode = "n"; key = "<A-Up>"; action = "<cmd>resize +2<cr>"; }
+      { mode = "n"; key = "<A-Down>"; action = "<cmd>resize -2<cr>"; }
+      { mode = "n"; key = "<A-Left>"; action = "<cmd>vertical resize -2<cr>"; }
+      { mode = "n"; key = "<A-Right>"; action = "<cmd>vertical resize +2<cr>"; }
+
+      # ターミナルモードで Esc を押すとノーマルモードに戻る
+      { mode = "t"; key = "<Esc>"; action = "<C-\\><C-n>"; }
+  
+      # ターミナルモードから直接他のウィンドウへ移動できるようにする
+      { mode = "t"; key = "<C-h>"; action = "<C-\\><C-n><C-w>h"; }
+      { mode = "t"; key = "<C-j>"; action = "<C-\\><C-n><C-w>j"; }
+      { mode = "t"; key = "<C-k>"; action = "<C-\\><C-n><C-w>k"; }
+      { mode = "t"; key = "<C-l>"; action = "<C-\\><C-n><C-w>l"; }
+
+      # スペース + ff でファイル検索 (Telescope)
       {
         mode = "n";
         key = "<leader>ff";
         action = "<cmd>Telescope find_files<CR>";
         options.desc = "Find Files";
       }
+
       # スペース + e でファイラー（Neo-tree）を開く
       {
         mode = "n";
@@ -84,6 +108,7 @@
           desc = "Explorer (Neo-tree)";
         };
       }
+
       # スペース + ff でファイル検索 (Telescope)
       {
         mode = "n";
@@ -93,6 +118,7 @@
           desc = "Find Files";
         };
       }
+
       # スペース + / でライブグレップ（全文検索）
       {
         mode = "n";
