@@ -21,7 +21,8 @@
     # 3. ファイラー (Neo-tree) の導入 (LazyVimで使われているもの)
     plugins.neo-tree = {
       enable = true;
-      closeIfLastWindow = true;
+    # closeIfLastWindow = true;
+      settings.close_if_last_window = true; # Neo-treeが最後のウィンドウなら自動で閉じる設定
     };
 
     # Copilot 本体の設定

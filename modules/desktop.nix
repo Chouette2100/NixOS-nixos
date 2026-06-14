@@ -67,9 +67,13 @@ in
   services.xserver.xkb = {
     layout = "jp";
     model = "jp106";
+  # variant = "";
+  # options = "ctrl:swapcaps"; # ここで入れ替えを指定
   };
 
   console.keyMap = "jp106";
+  # コンソール（TTY）でも入れ替えを有効にしたい場合
+# console.useXkbConfig = true;
 
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;

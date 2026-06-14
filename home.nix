@@ -75,8 +75,12 @@
         mhutchie.git-graph
         ms-ceintl.vscode-language-pack-ja
         vscodevim.vim
+        jnoortheen.nix-ide
+      # liemlb.nix-flakes
       ];
       userSettings = {
+        # テーマ設定
+        "workbench.colorTheme" = "Monokai Dimmed";
         "go.toolsManagement.autoUpdate" = false;
         "diffEditor.ignoreTrimWhitespace" = false;
         "go.alternateTools" = {
@@ -88,6 +92,8 @@
         "github.copilot.nextEditSuggestions.enabled" = true;
         "editor.editContext" = false;
         "files.autoSave" = "afterDelay";
+        "nix.enableLanguageServer" = true;
+      # "nix.serverPath" = "nixd";
       };
     };
   };
@@ -107,7 +113,8 @@
   programs.ssh = {
     enable = true;
     enableDefaultConfig = false;
-    matchBlocks = {
+  # matchBlocks = {
+    settings = {
       "*" = {
         forwardAgent = true;
       };
@@ -168,8 +175,8 @@
     [Desktop Entry]
     Type=Application
     Name=Set XKB to JP106
-    Exec=${pkgs.xorg.setxkbmap}/bin/setxkbmap -model jp106 -layout jp
-    X-GNOME-Autostart-enabled=true
+  # Exec=${pkgs.xorg.setxkbmap}/bin/setxkbmap -model jp106 -layout jp
+    Exec=${pkgs.setxkbmap}/bin/setxkbmap -model jp106 -layout jp X-GNOME-Autostart-enabled=true
     X-KDE-autostart-after=panel
     NoDisplay=true
   '';
