@@ -1,6 +1,6 @@
 { inputs, ... }: {
   imports = [
-    inputs.nixvim.homeManagerModules.nixvim
+    inputs.nixvim.homeModules.nixvim
   ];
 
   programs.nixvim.version.enableNixpkgsReleaseCheck = false;
@@ -35,7 +35,7 @@
             accept = "<M-l>"; # Alt + l で提案を確定 (LazyVimのデフォルトに近い)
             next = "<M-]>";   # Alt + ] で次の候補
             prev = "<M-[>";   # Alt + [ で前の候補
-            dismiss = "<C-]> "; # Ctrl + ] でキャンセル
+            dismiss = "<C-]>"; # Ctrl + ] でキャンセル
           };
         };
         panel = {
@@ -65,6 +65,7 @@
       ignorecase = true;     # 検索時に大文字小文字を無視
       smartcase = true;
       termguicolors = true;  # 真彩色対応
+      completeopt = "menu,menuone,noselect"; # CopilotChat / cmp の補完を安定させる
     };
 
     # キーマップ設定
@@ -106,16 +107,6 @@
         action = "<cmd>Neotree toggle<CR>";
         options = {
           desc = "Explorer (Neo-tree)";
-        };
-      }
-
-      # スペース + ff でファイル検索 (Telescope)
-      {
-        mode = "n";
-        key = "<leader>ff";
-        action = "<cmd>Telescope find_files<CR>";
-        options = {
-          desc = "Find Files";
         };
       }
 
