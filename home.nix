@@ -7,7 +7,7 @@
   home.homeDirectory = "/home/chouette";
 
   imports = [
-    ./modules/neovim.nix
+    ./modules/neovim
   ];
 
   # SSH鍵の設定（sourceを使用）
