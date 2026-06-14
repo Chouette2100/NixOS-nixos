@@ -61,6 +61,8 @@
     "f /home/chouette/.ssh/config 0600 - - - -"
   ];
 
+  programs.direnv.enable = true;
+
   programs.vscode = {
     enable = true;
     package = pkgs.vscode.overrideAttrs (old: {

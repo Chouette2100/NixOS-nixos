@@ -3,6 +3,13 @@
     # キーマップ設定
     programs.nixvim.keymaps = [
 
+      # デバッグ開始・継続
+      { mode = "n"; key = "<F5>"; action = "<cmd>lua require('dap').continue()<CR>"; options.desc = "Debug: Start/Continue"; }
+      { mode = "n"; key = "<F10>"; action = "<cmd>lua require('dap').step_over()<CR>"; options.desc = "Debug: Step Over"; }
+      { mode = "n"; key = "<F11>"; action = "<cmd>lua require('dap').step_into()<CR>"; options.desc = "Debug: Step Into"; }
+      { mode = "n"; key = "<leader>db"; action = "<cmd>lua require('dap').toggle_breakpoint()<CR>"; options.desc = "Debug: Toggle Breakpoint"; }
+      { mode = "n"; key = "<leader>du"; action = "<cmd>lua require('dapui').toggle()<CR>"; options.desc = "Debug: Toggle UI"; }
+
       #   ウィンドウ移動を Ctrl + hjkl に割り当てる
       { mode = "n"; key = "<C-h>"; action = "<C-w>h"; }
       { mode = "n"; key = "<C-j>"; action = "<C-w>j"; }

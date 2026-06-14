@@ -74,6 +74,25 @@
 
     # プラグイン設定
     plugins = {
+
+      # --- デバッグ設定 (DAP) ---
+      dap = {
+        enable = true;
+        extensions = {
+          dap-ui.enable = true;    # デバッグ画面のUI
+          dap-go.enable = true;    # Go用設定の自動化
+          dap-virtual-text.enable = true; # 変数の値をコード上に表示
+        };
+      };
+
+      # デバッグ用のキーマップ（例）
+      which-key.settings.spec = [
+        {
+          __unkeyed-1 = "<leader>d";
+          group = "Debug";
+        }
+      ];
+
       # 見た目系
       lualine.enable = true;   # ステータスライン
       bufferline.enable = true; # タブバー
