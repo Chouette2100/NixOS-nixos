@@ -5,6 +5,7 @@ backup
 new
 
 # Git
+*.bak
 *.swp
 *.swo
 *~

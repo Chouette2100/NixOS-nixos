@@ -82,7 +82,8 @@
       ];
       userSettings = {
         # テーマ設定
-        "workbench.colorTheme" = "Monokai Dimmed";
+      # "workbench.colorTheme" = "Monokai Dimmed";
+        "workbench.colorTheme" = "Tomorrow Night Blue";
         "go.toolsManagement.autoUpdate" = false;
         "diffEditor.ignoreTrimWhitespace" = false;
         "go.alternateTools" = {
