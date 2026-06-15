@@ -6,6 +6,8 @@
     ./opts.nix
   ];
 
+  programs.nixvim.nixpkgs.source = inputs.nixpkgs;
+
   programs.nixvim.version.enableNixpkgsReleaseCheck = false;
 
   programs.nixvim = {

@@ -7,6 +7,14 @@
     which-key = {
       enable = true;
       # メニューの見た目や挙動を細かく設定できますが、まずはデフォルトでOK
+
+      # デバッグ用のキーマップ（例）
+      settings.spec = [
+        {
+          __unkeyed-1 = "<leader>d";
+          group = "Debug";
+        }
+      ];
     };
 
       # --- デバッグ設定 (DAP) ---
@@ -22,13 +30,13 @@
       dap-go.enable = true;    # Go用設定の自動化
       dap-virtual-text.enable = true; # 変数の値をコード上に表示
 
-      # デバッグ用のキーマップ（例）
-      which-key.settings.spec = [
-        {
-          __unkeyed-1 = "<leader>d";
-          group = "Debug";
-        }
-      ];
+    # # デバッグ用のキーマップ（例）
+    # which-key.settings.spec = [
+    #   {
+    #     __unkeyed-1 = "<leader>d";
+    #     group = "Debug";
+    #   }
+    # ];
 
       # 見た目系
       lualine.enable = true;   # ステータスライン
