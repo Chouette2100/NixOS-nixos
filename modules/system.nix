@@ -25,6 +25,9 @@
   boot.loader.systemd-boot.enable = true;
   boot.loader.efi.canTouchEfiVariables = true;
 
+ 	# id=4696   modelname=gemini-3-flash-preview   maxtokens=20000   [26-06-15 21:32 ( 16.0s)]
+  boot.kernel.sysctl."kernel.unprivileged_userns_clone" = 1;
+
 
   time.timeZone = "Asia/Tokyo";
   
