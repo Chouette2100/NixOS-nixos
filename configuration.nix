@@ -74,7 +74,7 @@ in
     pciutils  # lspci
     usbutils  # lsusb (ついでにあると便利)
     lsof
-    google-chrome
+#   google-chrome
     terminator
     keepassxc
     # bottles  # Wine環境をGUIで管理するツール

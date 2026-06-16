@@ -63,6 +63,18 @@
 
   programs.direnv.enable = true;
 
+  programs.google-chrome = {
+    enable = true;
+    commandLineArgs = [
+      "--ozone-platform-hint=auto"
+      "--enable-features=WaylandWindowDecorations"
+      # もしこれでダメなら、一時的にGPUを無効化して検証
+      # "--disable-gpu" 
+
+      # "--ozone-platform=wayland --enable-wayland-ime"
+    ];
+  };
+
   programs.vscode = {
     enable = true;
     package = pkgs.vscode.overrideAttrs (old: {
@@ -245,12 +257,12 @@ systemd.user.services.dropbox-mount = {
     curl
     unzip
     jq
-  # 元の google-chrome を上書きする
-  (google-chrome.overrideAttrs (old: {
-    installPhase = old.installPhase + ''
-      wrapProgram $out/bin/google-chrome-stable \
-        --add-flags "--ozone-platform=wayland --enable-wayland-ime"
-    '';
-  }))
+# # 元の google-chrome を上書きする
+# (google-chrome.overrideAttrs (old: {
+#   installPhase = old.installPhase + ''
+#     wrapProgram $out/bin/google-chrome-stable \
+#       --add-flags "--ozone-platform=wayland --enable-wayland-ime"
+#   '';
+# }))
   ];
 }
