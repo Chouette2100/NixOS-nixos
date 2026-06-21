@@ -1,5 +1,6 @@
 # /etc/nixos/configuration.nix
-{ config, lib, pkgs, machineType ? "qemu", ... }:
+# { config, lib, pkgs, machineType ? "qemu", ... }:
+{ lib, pkgs, machineType ? "qemu", ... }:
 
 let
   isQemu = machineType == "qemu";

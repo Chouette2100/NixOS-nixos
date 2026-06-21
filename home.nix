@@ -1,5 +1,6 @@
 # /etc/nixos/home.nix
-{ config, pkgs, lib, inputs, ... }:
+# { config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   home.stateVersion = "25.11";
@@ -38,6 +39,16 @@
       force = true;
     };
   };
+
+  # Xhostでローカルアクセスを許可する.desktopファイルを作成する
+  xdg.configFile."autostart/xhost-local.desktop".text = ''
+  [Desktop Entry]
+  Type=Application
+  Name=Xhost Local Allow
+  Exec=${pkgs.xorg.xhost}/bin/xhost +local:
+  Terminal=false
+  X-KDE-AutostartScript=true
+  '';
 
 
   # 秘密鍵の復号化をactivationScriptで実行

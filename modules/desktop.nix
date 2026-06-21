@@ -1,5 +1,6 @@
 # /etc/nixos/modules/desktop.nix
-{ config, lib, pkgs, machineType ? "qemu", pkgs-nvidia, ... }:
+# { config, lib, pkgs, machineType ? "qemu", pkgs-nvidia, ... }:
+{ config, lib, pkgs, machineType ? "qemu", ... }:
 
 let
   isBaremetal = machineType == "baremetal";

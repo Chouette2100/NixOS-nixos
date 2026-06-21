@@ -1,5 +1,6 @@
 # /etc/nixos/modules/containers.nix
-{ config, pkgs, ... }:
+# { config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
 

@@ -1,8 +1,23 @@
 # /etc/nixos/filesystems.nix
-{ config, lib, pkgs, ... }:
+# { config, lib, pkgs, ... }:
+{ machineType ? "qemu", ... }:
+
+let
+  isQemu = machineType == "qemu";
+  # isBaremetal = machineType == "baremetal";
+in
 
 {
   fileSystems = {
+    "/home" = {
+      device = 
+        if isQemu then
+          "/dev/disk/by-uuid/6b6700e6-e806-4cf9-bdb3-4896318ae444"
+        else
+          "/dev/disk/by-uuid/d325e226-2824-4d85-a4f9-5e6af3697699";
+      fsType = "btrfs";
+      options = [ "subvol=@home" "compress=zstd:3" "noatime" ];
+    };
     "/mnt/m223" = {
       device = "/dev/disk/by-uuid/2af9c009-cd0e-4d9f-9319-e33e20ba2962";
       fsType = "btrfs";
