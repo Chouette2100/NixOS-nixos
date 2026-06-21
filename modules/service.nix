@@ -26,6 +26,7 @@ services.nfs.server = {
   enable = true;
   exports = ''
     /home/chouette/MyProject 192.168.0.0/16(rw,sync,no_subtree_check,root_squash)
+    /mnt/nfsh/custom/default_samba 10.231.221.0/24(rw,sync,no_subtree_check,root_squash)
   '';
 };
 
@@ -51,6 +52,7 @@ systemd.services.ssh-tunnel-kagoya = {
         -L 9910:127.0.0.1:3306 \
         -L 9384:127.0.0.1:8384 \
         -R 8008:localhost:8008 \
+        -R 8878:localhost:9978 \
         chouette@133.18.160.207
     '';
     Restart = "always";

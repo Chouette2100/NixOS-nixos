@@ -56,6 +56,7 @@ in
     # podman
     nfs-utils
     age  # ageをシステムにインストール
+    sops
     openssl
     librecad
     inkscape
@@ -66,6 +67,9 @@ in
     gopls
     delve
     golangci-lint
+  # stdenv
+    gcc
+  # playwright-driver.browsers
   # staticcheck
     gotools     # goimports など
     impl
@@ -77,6 +81,7 @@ in
 #   google-chrome
     terminator
     keepassxc
+    xhost
     # bottles  # Wine環境をGUIで管理するツール
     # sticky
     sticky-notes

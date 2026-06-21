@@ -22,6 +22,12 @@
         HostName github.com
         Port 22
         User git
+      Host u2604C
+        HostName 10.231.221.222
+        User chouette
+      Host u2404D
+        HostName 10.231.221.162
+        User chouette
       Host *
         Port 9978
         IdentityFile ~/.ssh/id_ed25519
@@ -115,12 +121,14 @@
         ms-ceintl.vscode-language-pack-ja
         vscodevim.vim
         jnoortheen.nix-ide
+        ms-vscode-remote.remote-ssh
       # liemlb.nix-flakes
       ];
       userSettings = {
         # テーマ設定
       # "workbench.colorTheme" = "Monokai Dimmed";
-        "workbench.colorTheme" = "Tomorrow Night Blue";
+        "workbench.colorTheme" = "Monokai";
+      # "workbench.colorTheme" = "Tomorrow Night Blue";
         "go.toolsManagement.autoUpdate" = false;
         "diffEditor.ignoreTrimWhitespace" = false;
         "go.alternateTools" = {
