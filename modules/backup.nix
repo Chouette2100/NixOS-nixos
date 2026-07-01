@@ -6,7 +6,7 @@
 # ログを確認するには：
 # journalctl -u vps-db-backup.service
 
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 
 let
   dbBackupScript = pkgs.writeShellScript "mysql-dump-vps" ''
@@ -21,11 +21,10 @@ let
     
     # --login-path を使用
     # ※ 事前に chouette ユーザーで mysql_config_editor set --login-path=kagoyar ... を実行しておく必要があります
-    ${pkgs.mariadb}/bin/mysqldump \
+    ${pkgs.mysql84}/bin/mysqldump \
       --login-path=kagoyar \
       --single-transaction \
       --flush-logs \
-      --source-data=2 \
       --databases "$DBNAME" > "$dumpfn"
 
     # 古いファイルの削除
@@ -57,7 +56,7 @@ in
     wantedBy = [ "timers.target" ];
     timerConfig = {
       # OnCalendar = "daily";
-      OnCalendar = "03:00:00";
+      OnCalendar = "16:00:00";
       # リスト形式で複数のスケジュールを指定
       # OnCalendar = [
       #   "Mon..Fri *-*-* 20:00:00"  # 月〜金 の 20:00

@@ -53,6 +53,7 @@ systemd.services.ssh-tunnel-kagoya = {
         -L 9910:127.0.0.1:3306 \
         -L 9384:127.0.0.1:8384 \
         -R 8008:localhost:8008 \
+        -R 8009:localhost:8009 \
         -R 8878:localhost:9978 \
         chouette@133.18.160.207
     '';
