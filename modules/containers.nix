@@ -27,10 +27,6 @@
     subGidRanges = [{ startGid = 100000; count = 65536; }];
   };
 
-  # コンテナ内でNVIDIA GPUを使用するための設定
-  # （distroboxの --nvidia オプションを機能させるために必要です）
-  hardware.nvidia-container-toolkit.enable = true;
-
   # Distrobox本体のインストール
   environment.systemPackages = with pkgs; [
     distrobox

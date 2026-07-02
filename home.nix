@@ -94,37 +94,16 @@
   };
   */
 
-  # id=4702   modelname=gemini-3-flash-preview   maxtokens=20000   [26-06-16 17:03 ( 12.9s)]
-  # パターンA：Waylandを維持しつつ安定させる（推奨）
-  # Vulkanを明示的に無効化し、NVIDIAで安定しやすいGLバックエンドを指定します。
-  # パターンB：一旦X11（XWayland）経由で動かす（確実性重視）
-  # もしパターンAでも落ちる場合は、ログの提案通りX11モードで動かします。
-  # KDE Plasma 6（Wayland）上でも、XWaylandという仕組みを通じて安定して動作します。
-  # WebGLが有効にならない件については次を参照のこと
-  # id=4704   modelname=gemini-3-flash-preview   maxtokens=20000   [26-06-16 21:02 ( 27.2s)]
   programs.google-chrome = {
     enable = true;
     commandLineArgs = [
       "--ozone-platform-hint=auto"
-    # "--ozone-platform=wayland"
-      "--ozone-platform=x11"
-      "--disable-features=Vulkan"        # ←ログの指示通りVulkanをオフにする
-    # "--use-gl=egl"                     # ←NVIDIA Wayland環境で最も安定する設定
-      "--use-gl=desktop"                 # ← egl から desktop に変更してみる
-      "--ignore-gpu-blocklist"           # これがブラックリストを無視する設定
-      "--enable-gpu-rasterization"
-      "--enable-accelerated-2d-canvas"   # 2D描画の加速も追加
     ];
   };
 
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode.overrideAttrs (old: {
-      postFixup = (old.postFixup or "") + ''
-        wrapProgram $out/bin/code \
-          --add-flags "--ozone-platform=x11"
-      '';
-    });
+    package = pkgs.vscode;
     profiles.default = {
       extensions = with pkgs.vscode-extensions; [
         golang.go
