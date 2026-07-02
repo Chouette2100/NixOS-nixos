@@ -54,17 +54,18 @@
           };
         }
       ];
-      storage_pools = [
-        {
-          name = "default";
-          driver = "btrfs";
-          config = {
-            # ここにソースを指定
-          # source = "/dev/disk/by-uuid/a8b6d806-1997-4e79-a615-fd87db5de7f6";
-            source = "/mnt/sda3/@incus";
-          };
-        }
-      ];
+    # 以下必要なのは最初の一回だけ
+    # storage_pools = [
+    #   {
+    #     name = "default";
+    #     driver = "btrfs";
+    #     config = {
+    #       # ここにソースを指定
+    #     # source = "/dev/disk/by-uuid/a8b6d806-1997-4e79-a615-fd87db5de7f6";
+    #       source = "/mnt/sda3/@incus";
+    #     };
+    #   }
+    # ];
       profiles = [
         {
           name = "default";
