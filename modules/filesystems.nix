@@ -1,6 +1,6 @@
 # /etc/nixos/filesystems.nix
 # { config, lib, pkgs, ... }:
-{ machineType ? "qemu", ... }:
+{ machineType ? "baremetal", ... }:
 
 let
   isQemu = machineType == "qemu";

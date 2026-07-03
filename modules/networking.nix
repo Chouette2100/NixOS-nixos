@@ -1,5 +1,5 @@
 # /etc/nixos/modules/networking.nix
-{ config, lib, pkgs, machineType ? "qemu", ... }:
+{ config, lib, pkgs, machineType ? "baremetal", ... }:
 
 let
   isQemu = machineType == "qemu";

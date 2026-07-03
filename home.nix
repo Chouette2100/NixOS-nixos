@@ -229,22 +229,35 @@
     LockOnStartup=false
   '';
 
+  # fcitx5 トリガーキーを半角/全角キーに設定
+  xdg.configFile."fcitx5/config".force = true;
+  xdg.configFile."fcitx5/config".text = ''
+    [Hotkey]
+    TriggerKeys=Zenkaku_Hankaku
+
+    [Hotkey/TriggerKeys]
+    0=Zenkaku_Hankaku
+  '';
+
   xdg.configFile."kxkbrc".text = ''
     [Layout]
-    DisplayNames=,
-    LayoutList=jp,us
+    DisplayNames=
+    LayoutList=jp
     Model=jp106
     Options=
     ResetOldOptions=true
+    ShowFlag=false
+    SwitchMode=WinClass
     Use=true
-    VariantList=,
+    VariantList=
   '';
 
   xdg.configFile."autostart/setxkbmap-jp.desktop".text = ''
     [Desktop Entry]
     Type=Application
     Name=Set XKB to JP106
-    Exec=${pkgs.setxkbmap}/bin/setxkbmap -model jp106 -layout jp X-GNOME-Autostart-enabled=true
+    Exec=${pkgs.setxkbmap}/bin/setxkbmap -model jp106 -layout jp
+    X-GNOME-Autostart-enabled=true
     X-KDE-autostart-after=panel
     NoDisplay=true
   '';

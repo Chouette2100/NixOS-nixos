@@ -1,6 +1,6 @@
 # /etc/nixos/modules/desktop.nix
-# { lib, pkgs, machineType ? "qemu", ... }:
-{ lib, pkgs, machineType ? "qemu", ... }:
+# { lib, pkgs, machineType ? "baremetal", ... }:
+{ lib, pkgs, machineType ? "baremetal", ... }:
 
 let
   isBaremetal = machineType == "baremetal";
@@ -22,6 +22,9 @@ in
   };
 
   services.displayManager.sddm.enable = true;
+  services.displayManager.sddm.wayland.enable = false;
+  services.displayManager.defaultSession = "plasmax11";
+  services.displayManager.sddm.settings.Users.RememberLastSession = false;
   services.desktopManager.plasma6.enable = true;
 
 # services.greetd = {
