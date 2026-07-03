@@ -10,6 +10,10 @@ in
   services.xserver.enable = true;
 
   services.xserver.videoDrivers = lib.optionals isBaremetal [ "amdgpu" ];
+  services.xserver.deviceSection = lib.mkIf isBaremetal ''
+    Option "PrimaryGPU" "true"
+    BusID "PCI:3:0:0"
+  '';
 
   hardware = lib.mkIf isBaremetal {
     graphics.enable = true;
@@ -70,6 +74,11 @@ in
     kitty         # 推奨ターミナル
     swww          # 壁紙管理
   ];
+
+  environment.sessionVariables = lib.mkIf isBaremetal {
+    WLR_DRM_DEVICES = "/dev/dri/by-path/pci-0000:03:00.0-card:/dev/dri/by-path/pci-0000:00:02.0-card";
+    KWIN_DRM_DEVICES = "/dev/dri/by-path/pci-0000:03:00.0-card:/dev/dri/by-path/pci-0000:00:02.0-card";
+  };
 
   # id=4451   modelname=deepseek-v4-pro   maxtokens=20000   [26-05-27 09:19 ( 41.1s)]
   # キーボードがUSであると半角/全角キーで「&#x60;」が出る
