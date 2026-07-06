@@ -1,5 +1,6 @@
 # /etc/nixos/modules/system.nix
-{ config, pkgs, ... }:
+# { config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
   nix = {
@@ -93,6 +94,16 @@
   # gnome-keyring を有効にする((distroboxの)mysql-workbench用)
     services.gnome.gnome-keyring.enable = true;
     security.pam.services.login.enableGnomeKeyring = true; # ログイン時に自動解錠
+
+# # CUPS印刷サービスを有効化
+# services.printing = {
+#   enable = true;
+#   # オープンソースのブラザードライバーと自動検出用フィルタを追加
+#   drivers = with pkgs; [ 
+#     brlaser 
+#     cups-filters 
+#   ];
+# };
 
 
   nixpkgs.config.allowUnfree = true;

@@ -33,11 +33,30 @@ in
     uid = 1001;
     description = "Chouette2100";
     group = "chouette";
-    extraGroups = [ "networkmanager" "wheel" "incus-admin" ];
+    extraGroups = [
+      "net workmanager"
+      "wheel"
+      "libvirtd"
+      "kvm" 
+      "incus-admin"
+      ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIESoXUKQ+RNr/bJ99H09filTh0Xfh4E8/oK4kIV5KOeq chouette@600G4Mint"
     ];
   };
+
+  # Polkitを有効化（通常はデスクトップ環境で有効になっていますが念のため）
+  security.polkit.enable = true;
+
+  # USBリダイレクトのためのPolkitルール
+  security.polkit.extraConfig = ''
+    polkit.addRule(function(action, subject) {
+      if ((action.id == "org.spice-space.lowlevelusbaccess") &&
+          subject.isInGroup("libvirtd")) {
+        return polkit.Result.YES;
+      }
+    });
+  '';
 
 # networking.firewall.enable = false; # test of LINE
 

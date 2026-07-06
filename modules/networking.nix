@@ -1,5 +1,6 @@
 # /etc/nixos/modules/networking.nix
-{ config, lib, pkgs, machineType ? "baremetal", ... }:
+# { config, lib, pkgs, machineType ? "baremetal", ... }:
+{ lib, machineType ? "baremetal", ... }:
 
 let
   isQemu = machineType == "qemu";
@@ -48,7 +49,7 @@ in
   };
   networking.nftables.enable = true;
   networking.hosts = {
-    "192.168.0.13" = [ "Mint221BE" ];
+    "192.168.0.18" = [ "nixos" ];
     "192.168.0.23" = [ "LB10" ];
     "192.168.0.16" = [ "opi" ];
     "192.168.0.21" = [ "opiwf" ];
@@ -67,7 +68,7 @@ in
   
   # QEMU/KVM
   fileSystems."/mnt/nfsh" = lib.mkIf isQemu {
-    device = "192.168.0.13:/mnt/lxddefault/custom/default_samba";
+    device = "192.168.0.18:/mnt/lxddefault/custom/default_samba";
     fsType = "nfs";
     options = [
       "nfsvers=4.2"

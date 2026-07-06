@@ -1,5 +1,6 @@
 # /etc/nixos/modules/containers.nix
-{ config, pkgs, ... }:
+# { config, pkgs, ... }:
+{ pkgs, ... }:
 
 {
 
@@ -35,6 +36,10 @@
 
   # GUI (virt-manager) を有効化 (libvirtd や polkit も自動で設定)
   programs.virt-manager.enable = true;
+
+  # SPICE USB リダイレクト用 helper を setuid で有効化
+  # (手動の polkit ルールだけでは ACL 付与に失敗する場合がある)
+  virtualisation.spiceUSBRedirection.enable = true;
 
   networking.firewall.trustedInterfaces = [ "virbr0" ];
 
