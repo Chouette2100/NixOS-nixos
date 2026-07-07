@@ -1,7 +1,16 @@
 # /etc/nixos/home.nix
 # { config, pkgs, lib, inputs, ... }:
 { config, pkgs, lib, ... }:
-
+let
+  cline = pkgs.vscode-utils.buildVscodeMarketplaceExtension {
+    mktplcRef = {
+      name = "claude-dev";
+      publisher = "saoudrizwan";
+      version = "4.0.6";
+      hash = "sha256-Bj/LYDPv5grQc1S0+gGid55Gfhd2QexIC9nro1oy3Eg=";
+    };
+  };
+in
 {
   home.stateVersion = "25.11";
   home.username = "chouette";
@@ -101,6 +110,9 @@
     ];
   };
 
+  # Cline (Claude Dev) を Marketplace から宣言的に取得
+  # version は Marketplace の itemName を確認して更新します。
+
   programs.vscode = {
     enable = true;
     package = pkgs.vscode;
@@ -112,6 +124,7 @@
         vscodevim.vim
         jnoortheen.nix-ide
         ms-vscode-remote.remote-ssh
+        cline
       # liemlb.nix-flakes
       ];
       userSettings = {
@@ -140,9 +153,12 @@
             };
           };
         };
+        # Cline の API 設定は拡張機能内部の Secret Storage に保存されるため、
+        # userSettings への平文記述は不要です。
       };
     };
   };
+# }
 
 # wayland.windowManager.hyprland = {
 #   enable = true;
