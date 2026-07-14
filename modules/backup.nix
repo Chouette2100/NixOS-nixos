@@ -6,7 +6,8 @@
 # ログを確認するには：
 # journalctl -u vps-db-backup.service
 
-{ pkgs, inputs, ... }:
+# { pkgs, inputs, ... }:
+{ pkgs, ... }:
 
 let
   dbBackupScript = pkgs.writeShellScript "mysql-dump-vps" ''

@@ -36,6 +36,7 @@ in
     extraGroups = [
       "net workmanager"
       "wheel"
+      "dialout"
       "libvirtd"
       "kvm" 
       "incus-admin"
@@ -79,6 +80,9 @@ in
     age  # ageをシステムにインストール
     sops
     openssl
+    minicom
+    net-tools
+    tigervnc
     librecad
     inkscape
     gforth
