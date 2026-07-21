@@ -18,6 +18,10 @@ in
   hardware = lib.mkIf isBaremetal {
     graphics.enable = true;
     graphics.enable32Bit = true; # for Bottles/LINE
+    graphics.extraPackages = with pkgs; [
+      intel-media-driver
+      intel-vaapi-driver
+    ];
 
   };
 
@@ -75,12 +79,15 @@ in
 #   rofi-wayland  # アプリランチャー
     rofi
     kitty         # 推奨ターミナル
-    swww          # 壁紙管理
+  # swww          # 壁紙管理
+    awww          # 壁紙管理
   ];
 
   environment.sessionVariables = lib.mkIf isBaremetal {
     WLR_DRM_DEVICES = "/dev/dri/by-path/pci-0000:03:00.0-card:/dev/dri/by-path/pci-0000:00:02.0-card";
     KWIN_DRM_DEVICES = "/dev/dri/by-path/pci-0000:03:00.0-card:/dev/dri/by-path/pci-0000:00:02.0-card";
+    LIBVA_DRIVER_NAME = "iHD";
+    LIBVA_DRM_DEVICE = "/dev/dri/by-path/pci-0000:00:02.0-render";
   };
 
   # id=4451   modelname=deepseek-v4-pro   maxtokens=20000   [26-05-27 09:19 ( 41.1s)]

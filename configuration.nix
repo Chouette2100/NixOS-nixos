@@ -27,7 +27,7 @@ in
   services.xserver.videoDrivers = lib.optionals isQemu [ "qxl" ];
 
   # ユーザー設定
-  users.groups.chouette = {};
+  users.groups.chouette = { };
   users.users.chouette = {
     isNormalUser = true;
     uid = 1001;
@@ -38,9 +38,9 @@ in
       "wheel"
       "dialout"
       "libvirtd"
-      "kvm" 
+      "kvm"
       "incus-admin"
-      ];
+    ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIESoXUKQ+RNr/bJ99H09filTh0Xfh4E8/oK4kIV5KOeq chouette@600G4Mint"
     ];
@@ -59,10 +59,21 @@ in
     });
   '';
 
-# networking.firewall.enable = false; # test of LINE
+  # networking.firewall.enable = false; # test of LINE
 
   services.flatpak.enable = true;
-  programs.steam.enable = true; 
+  programs.steam.enable = true;
+
+  programs.obs-studio = {
+    enable = true;
+    enableVirtualCamera = true; # 仮想カメラを使いたい場合
+    plugins = with pkgs.obs-studio-plugins; [
+      obs-vaapi # VA-API経由でIntel GPUを使うために重要
+      obs-gstreamer
+      obs-multi-rtmp # 同時配信したい場合
+    ];
+  };
+
 
   # システムパッケージ
   environment.systemPackages = with pkgs; [
@@ -77,7 +88,7 @@ in
     # distrobox
     # podman
     nfs-utils
-    age  # ageをシステムにインストール
+    age # ageをシステムにインストール
     sops
     openssl
     minicom
@@ -92,18 +103,18 @@ in
     gopls
     delve
     golangci-lint
-  # stdenv
+    # stdenv
     gcc
-  # playwright-driver.browsers
-  # staticcheck
-    gotools     # goimports など
+    # playwright-driver.browsers
+    # staticcheck
+    gotools # goimports など
     impl
     gomodifytags
     go-outline
-    pciutils  # lspci
-    usbutils  # lsusb (ついでにあると便利)
+    pciutils # lspci
+    usbutils # lsusb (ついでにあると便利)
     lsof
-#   google-chrome
+    #   google-chrome
     terminator
     keepassxc
     xhost
@@ -121,13 +132,13 @@ in
 
   environment.etc."xdg/autostart/spice-vdagent.desktop" = lib.mkIf isQemu {
     text = ''
-  [Desktop Entry]
-  Name=Spice vdagent
-  Exec=spice-vdagent
-  Type=Application
-  X-GNOME-Autostart-enabled=true
-  NoDisplay=true
-'';
+      [Desktop Entry]
+      Name=Spice vdagent
+      Exec=spice-vdagent
+      Type=Application
+      X-GNOME-Autostart-enabled=true
+      NoDisplay=true
+    '';
   };
 
   # SSHサーバー設定
@@ -148,7 +159,7 @@ in
     dataDir = "/home/chouette/MyProject/Obsidian"; # デフォルトの保存先
     configDir = "/home/chouette/.config/syncthing";
     guiAddress = "127.0.0.1:8384";
-};
+  };
 
   # 状態バージョン
   system.stateVersion = "25.11";
