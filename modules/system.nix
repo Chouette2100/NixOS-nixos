@@ -18,7 +18,18 @@
     gc = {
       automatic = true;
       dates = "weekly";
-      options = "--delete-older-than 7d";
+      # options = "--delete-older-than 7d";
+      options = "--delete-generations +10";
+      # 「絶対に消したくない特定の世代」がある場合
+      # id=4880   modelname=gemini-3-flash-preview   maxtokens=20000   [26-07-24 13:09 ( 32.8s)]
+      # 現在のシステム世代を新しいプロファイル名としてリンクする
+      # 例 sudo ln -s /nix/var/nix/profiles/system-165-link /nix/var/nix/profiles/stable-20241027
+      # nix-gc を実行しても、この stable-20241027 が参照しているファイルは絶対に削除されません。
+      # ブートメニューには自動では出ませんが、必要になった時にいつでもこの状態に戻せます。
+      # もし今のシステムが壊れて、その「絶対に残したかった状態」に戻りたくなったら、
+      # 以下のコマンドでそのプロファイルを現在のシステムに強制適用する。
+      # sudo nix-env --profile /nix/var/nix/profiles/system --set /nix/var/nix/profiles/stable-20241027
+      # sudo /nix/var/nix/profiles/system/bin/switch-to-configuration switch
     };
   };
   

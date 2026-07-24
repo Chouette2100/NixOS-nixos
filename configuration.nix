@@ -1,5 +1,17 @@
 # /etc/nixos/configuration.nix
+
+# ビルドして結果を即時反映する
+#     sudo nixos-rebuild switch --flake '.#baremetal'
+# ビルドした結果を再起動後に反映する
+# sudo nixos-rebuild boot --flake '.#baremetal'
+
+# 過去の世代の一覧を表示する。
+# id=4877   modelname=gemini-3-flash-preview   maxtokens=20000   [26-07-24 09:44 ( 7.7s)]
+# chouette@nixos:~$ sudo nix-env -p /nix/var/nix/profiles/system --list-generations
+# chouette@nixos:~$ nh os info
+
 # { config, lib, pkgs, machineType ? "baremetal", ... }:
+
 { lib, pkgs, machineType ? "baremetal", ... }:
 
 let
@@ -77,6 +89,7 @@ in
 
   # システムパッケージ
   environment.systemPackages = with pkgs; [
+    nh
     rclone
     fish
     vim
