@@ -93,6 +93,7 @@
     pulse.enable = true;
     # Bluetoothオーディオの有効化
     wireplumber.enable = true;
+    jack.enable = true;   # Rosegarden は JACK を使うことが多い
   };
 
   # PulseAudio が起動していないことを確認
