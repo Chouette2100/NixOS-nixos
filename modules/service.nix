@@ -75,7 +75,7 @@ systemd.services.ssh-tunnel-ubuntu05 = {
     User = "chouette"; # 既存のSSH鍵を持つユーザー
     ExecStart = ''
       ${pkgs.openssh}/bin/ssh -p 9978 -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -N \
-        -L 9998:127.0.0.1:3306 \
+        -L 9911:127.0.0.1:3306 \
         chouette@192.168.0.28
     '';
     Restart = "always";

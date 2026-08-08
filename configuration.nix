@@ -31,6 +31,7 @@ in
     ./modules/service.nix
     ./modules/filesystems.nix
     ./modules/backup.nix
+    ./modules/printer.nix
   ];
 
   # QEMU/KVM専用設定（SPICE / QXL）
