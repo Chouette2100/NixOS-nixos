@@ -54,7 +54,6 @@ in
   [Desktop Entry]
   Type=Application
   Name=Xhost Local Allow
-# Exec=${pkgs.xorg.xhost}/bin/xhost +local:
   Exec=${pkgs.xhost}/bin/xhost +local:
   Terminal=false
   X-KDE-AutostartScript=true

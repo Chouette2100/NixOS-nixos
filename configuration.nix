@@ -16,6 +16,29 @@
 
 let
   isQemu = machineType == "qemu";
+  minecloniaVersion = "0.99.1";
+  minetestWorldName = "world4";
+  minetestWorldPath = "/var/lib/minetest/worlds/${minetestWorldName}";
+  minetestLegacyWorldPath = "/home/chouette/.minetest/worlds/${minetestWorldName}";
+  minecloniaGame = pkgs.stdenvNoCC.mkDerivation {
+    pname = "mineclonia";
+    version = minecloniaVersion;
+    src = pkgs.fetchzip {
+      url = "https://codeberg.org/mineclonia/mineclonia/archive/${minecloniaVersion}.tar.gz";
+      hash = "sha256-+0PZUR24cILm6fgL4H/zhbHpMLK3Dg91Ihs0YfAoboU=";
+      stripRoot = false;
+    };
+    dontConfigure = true;
+    dontBuild = true;
+    installPhase = ''
+      mkdir -p "$out/share/luanti/games/mineclonia"
+      if [ -f game.conf ]; then
+        cp -r . "$out/share/luanti/games/mineclonia"
+      else
+        cp -r ./mineclonia/. "$out/share/luanti/games/mineclonia"
+      fi
+    '';
+  };
 in
 {
   nixpkgs.config.allowUnfree = true;
@@ -99,6 +122,7 @@ in
     btop
     # id=4486   modelname=gemini-3-flash-preview   maxtokens=20000   [26-05-30 21:32 ( 13.3s)]
     nvtopPackages.full
+    amdgpu_top
     # distrobox
     # podman
     nfs-utils
@@ -182,6 +206,58 @@ in
     configDir = "/home/chouette/.config/syncthing";
     guiAddress = "127.0.0.1:8384";
   };
+
+  services.minetest-server = {
+    enable = true;
+    # 使用するゲーム
+    gameId = "mineclonia";
+    # サービスユーザーが読める場所で運用する
+    world = minetestWorldPath;
+
+    # サーバー設定
+    config = {
+      # 管理者ユーザー名を指定（ここに追加）
+      name = "chouette"; 
+
+      server_name = "World4";
+      server_description = "NixOS Minetest Server";
+      max_users = 5;
+
+      # クリエイティブモードとダメージの設定をここに追加
+      creative_mode = true;
+      enable_damage = false;
+
+      # Mineclonia/MineClone2 特有のオプションが必要な場合もあります
+      # (基本は上記で足りますが、念のため)
+      # mcl_creative_mode = true; 
+
+      # デフォルトで全員に与えたい権限（任意）
+      # ここに fly を入れておけば、grantme を打たなくても最初から飛べます
+      default_privs = "interact, shout, fast, fly, creative";
+
+      # 家族だけが入れるようにパスワードを設定する場合
+      # strict_protocol_version_checking = true;
+    };
+  };
+
+  systemd.tmpfiles.rules = [
+    "d /var/lib/minetest/.minetest 0755 minetest minetest -"
+    "d /var/lib/minetest/.minetest/games 0755 minetest minetest -"
+    "d /var/lib/minetest/worlds 0755 minetest minetest -"
+    "d ${minetestWorldPath} 0755 minetest minetest -"
+    "L+ /var/lib/minetest/.minetest/games/mineclonia - - - - ${minecloniaGame}/share/luanti/games/mineclonia"
+  ];
+
+  system.activationScripts.minetestWorldBootstrap.text = ''
+    if [ ! -e "${minetestWorldPath}/world.mt" ] && [ -f "${minetestLegacyWorldPath}/world.mt" ]; then
+      ${pkgs.coreutils}/bin/mkdir -p "${minetestWorldPath}"
+      ${pkgs.coreutils}/bin/cp -a "${minetestLegacyWorldPath}/." "${minetestWorldPath}/"
+      ${pkgs.coreutils}/bin/chown -R minetest:minetest "${minetestWorldPath}"
+    fi
+  '';
+
+  # ポート開放 (デフォルトは UDP 30000)
+  networking.firewall.allowedUDPPorts = [ 30000 ];
 
   # 状態バージョン
   system.stateVersion = "25.11";
