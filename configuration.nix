@@ -82,6 +82,21 @@ in
     ];
   };
 
+  # ユーザー設定
+  # users.groups.chouette = { };
+  users.users.nixos = {
+    isNormalUser = true;
+    uid = 1000;
+    description = "nixos";
+    group = "users";
+    extraGroups = [
+      "wheel"
+    ];
+    # openssh.authorizedKeys.keys = [
+    #   "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIESoXUKQ+RNr/bJ99H09filTh0Xfh4E8/oK4kIV5KOeq chouette@600G4Mint"
+    # ];
+  };
+
   # Polkitを有効化（通常はデスクトップ環境で有効になっていますが念のため）
   security.polkit.enable = true;
 
