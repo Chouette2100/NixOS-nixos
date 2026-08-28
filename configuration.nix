@@ -183,6 +183,11 @@ in
     qsynth
     soundfont-fluid # FluidR3_GM.sf2 などが入る
     qjackctl # 必要なら
+    # 極小ナレッジ管理
+    fzf
+    ripgrep
+    bat
+    fd
     # mysql-workbench # /usr/sbin/mysqld  Ver 8.0.45-0ubuntu0.24.04.1に対応していない
     # wineWowPackages.stable # 64bitおよび32bit環境をサポートする安定版
     # winetricks             # 各種ライブラリ導入ツール（必要に応じて）

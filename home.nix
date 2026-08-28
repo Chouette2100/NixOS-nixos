@@ -15,6 +15,13 @@ in
   home.stateVersion = "25.11";
   home.username = "chouette";
   home.homeDirectory = "/home/chouette";
+  home.sessionPath = [
+    "$HOME/.local/bin"
+    "$HOME/bin"
+  ];
+  home.sessionVariables = {
+    KB_DIR = "$HOME/kb";
+  };
 
   imports = [
     ./modules/neovim
@@ -79,6 +86,9 @@ in
         echo "Please decrypt manually:"
         echo "  age -d -i ~/.config/age/key.txt -o ~/.ssh/id_ed25519 ~/NixOS-nixos/secrets/id_ed25519.age"
       fi
+    '';
+    createKbDir = lib.hm.dag.entryAfter ["writeBoundary"] ''
+      mkdir -p "${config.home.homeDirectory}/kb"
     '';
   };
 
@@ -232,11 +242,59 @@ in
     };
     
     initExtra = ''
+      # Terminator/Konsole などの非ログイン bash でも HM の session vars/path を有効化
+      if [ -f "$HOME/.profile" ]; then
+        . "$HOME/.profile"
+      fi
+
+      # 念のため interactive bash 側でも PATH と KB_DIR を補強する
+      case ":$PATH:" in
+        *":$HOME/.local/bin:"*) ;;
+        *) export PATH="$HOME/.local/bin:$PATH" ;;
+      esac
+      case ":$PATH:" in
+        *":$HOME/bin:"*) ;;
+        *) export PATH="$HOME/bin:$PATH" ;;
+      esac
+      export KB_DIR="''${KB_DIR:-$HOME/kb}"
+
       export PS1='\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
       
       if [ -z "$SSH_AUTH_SOCK" ]; then
         eval "$(ssh-agent -s)" > /dev/null
       fi
+
+      kb() {
+        case "$1" in
+          "add")
+            local title="''${2:-memo}"
+            local filename="''${KB_DIR}/$(date +%Y%m%d%H%M)-''${title// /-}.md"
+            echo "# ''${title}" > "$filename"
+            nvim "+normal G" "+startinsert" "$filename"
+            ;;
+          *)
+            local selected
+            selected=$(fd --type f . "$KB_DIR" | fzf \
+              --preview "bat --color=always --style=numbers {}" \
+              --preview-window=right:60% \
+              --bind "ctrl-e:execute(nvim {})+accept")
+
+            [ -n "$selected" ] && nvim "$selected"
+            ;;
+        esac
+      }
+
+      kbg() {
+        local selected
+        selected=$(rg --line-number --no-heading --color=always "" "$KB_DIR" | fzf \
+          --ansi \
+          --delimiter : \
+          --preview "bat --color=always --style=numbers {1} --highlight-line {2}" \
+          --preview-window=right:60% \
+          --bind "ctrl-e:execute(nvim +{2} {1})+accept")
+
+        [ -n "$selected" ] && nvim "+$(echo "$selected" | cut -d: -f2)" "$(echo "$selected" | cut -d: -f1)"
+      }
     '';
   };
 
