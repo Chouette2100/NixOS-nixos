@@ -40,6 +40,7 @@ in
         User chouette
       Host *
         Port 9978
+        AddressFamily inet
         IdentityFile ~/.ssh/id_ed25519
         IdentitiesOnly yes
         ServerAliveInterval 60
@@ -328,6 +329,9 @@ systemd.user.services.dropbox-mount = {
     gimp
     inkscape
     vlc             # 動画再生
+
+    # Utility
+    multitail
 
     # vsocde拡張機能で必要なコマンド
     nixd

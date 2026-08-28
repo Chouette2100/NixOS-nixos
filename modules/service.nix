@@ -63,6 +63,27 @@ systemd.services.ssh-tunnel-kagoya = {
 };
 
 # Port forwarding
+systemd.services.ssh-tunnel-nix01 = {
+  description = "SSH Tunnel to nix01 (Local)";
+  after = [ "network-online.target" ];
+  wants = [ "network-online.target" ];
+  wantedBy = [ "multi-user.target" ]; # これでログイン不要で起動
+
+  # SSHトンネル設定
+  # ローカル:9901 → リモートmariadb (127.0.0.1:3306)
+  serviceConfig = {
+    User = "chouette"; # 既存のSSH鍵を持つユーザー
+    ExecStart = ''
+      ${pkgs.openssh}/bin/ssh -p 9978 -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -N \
+        -L 9901:127.0.0.1:3306 \
+        chouette@133.18.43.195
+    '';
+    Restart = "always";
+    RestartSec = "15s";
+  };
+};
+
+# Port forwarding
 systemd.services.ssh-tunnel-ubuntu05 = {
   description = "SSH Tunnel to ubuntu05 (Local & Reverse)";
   after = [ "network-online.target" ];
