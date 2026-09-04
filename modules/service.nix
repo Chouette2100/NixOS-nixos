@@ -55,6 +55,7 @@ systemd.services.ssh-tunnel-kagoya = {
         -R 8008:localhost:8008 \
         -R 8009:localhost:8009 \
         -R 8878:localhost:9978 \
+        -R 30000:localhost:8008 \
         chouette@133.18.160.207
     '';
     Restart = "always";

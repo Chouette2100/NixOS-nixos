@@ -16,6 +16,8 @@
 
 let
   isQemu = machineType == "qemu";
+
+
   minecloniaVersion = "0.99.1";
   minetestWorldName = "world4";
   minetestWorldPath = "/var/lib/minetest/worlds/${minetestWorldName}";
@@ -123,6 +125,18 @@ in
       obs-gstreamer
       obs-multi-rtmp # 同時配信したい場合
     ];
+  };
+
+  # Tailscale サービスの有効化
+  services.tailscale.enable = true;
+
+  # ファイアウォールの設定
+  networking.firewall = {
+    enable = true;
+    # Tailscaleインターフェースからの通信をすべて許可
+    trustedInterfaces = [ "tailscale0" ];
+    # Tailscaleのルーティングを正常にする設定
+    checkReversePath = false;
   };
 
 
