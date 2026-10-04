@@ -186,6 +186,7 @@ in
     keepassxc
     multitail
     xhost
+    xdpyinfo
     # bottles  # Wine環境をGUIで管理するツール
     # sticky
     sticky-notes
