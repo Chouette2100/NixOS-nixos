@@ -172,6 +172,7 @@ in
     golangci-lint
     # stdenv
     gcc
+    gnumake
     # playwright-driver.browsers
     # staticcheck
     gotools # goimports など

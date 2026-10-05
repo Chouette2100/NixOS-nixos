@@ -45,6 +45,9 @@ in
       Host u2404D
         HostName 10.231.221.162
         User chouette
+      Host nix01
+        HostName 133.18.43.195
+        User chouette
       Host *
         Port 9978
         AddressFamily inet
