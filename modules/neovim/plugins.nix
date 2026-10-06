@@ -20,14 +20,9 @@
     # --- デバッグ設定 (DAP) ---
     dap = {
       enable = true;
-      extensionConfig = ''
-        -- プロジェクトの .vscode/launch.json を読み込む設定
-        require('dap.ext.vscode').load_launchjs(nil, {
-          -- 言語名と、dapのアダプタ名を紐付けます
-          go = {'go'},
-          cpp = {'cppdbg'},
-          python = {'python'},
-        })
+      # extensionConfigLua を空にするか、不要な行を削除します
+      extensionConfigLua = ''
+        -- load_launchjs は自動実行されるようになったため、ここでの明示的な呼び出しは不要です
       '';
 
       #  extensions = {
@@ -126,7 +121,7 @@
       };
     };
 
-    plugins.copilot-chat = {
+    copilot-chat = {
       enable = true;
     };
 
