@@ -54,6 +54,7 @@ in
   # 平日の20時の次の実行予定を確認
   # systemd-analyze calendar "Mon..Fri *-*-* 20:00:00"
   systemd.timers.vps-db-backup = {
+    enable = false;   # 一時停止
     wantedBy = [ "timers.target" ];
     timerConfig = {
       # OnCalendar = "daily";
@@ -63,7 +64,7 @@ in
       #   "Mon..Fri *-*-* 20:00:00"  # 月〜金 の 20:00
       #   "Sat,Sun *-*-* 18:00:00"    # 土・日 の 18:00
       # ];
-      Persistent = true;
+      Persistent = false;  # trueにするならタイマーが再開したあとサービスが一度起動してからtrueにするのが安全
       Unit = "vps-db-backup.service";
     };
   };
