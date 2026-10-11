@@ -409,6 +409,8 @@ systemd.user.services.dropbox-mount = {
     curl
     unzip
     jq
+    # wallpaper
+    nixos-artwork.wallpapers.mosaic-blue
 # # 元の google-chrome を上書きする
 # (google-chrome.overrideAttrs (old: {
 #   installPhase = old.installPhase + ''
