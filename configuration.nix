@@ -18,7 +18,8 @@ let
   isQemu = machineType == "qemu";
 
 
-  minecloniaVersion = "0.99.1";
+  #  minecloniaVersion = "0.99.1";
+  minecloniaVersion = "0.124.0";
   minetestWorldName = "world4";
   minetestWorldPath = "/var/lib/minetest/worlds/${minetestWorldName}";
   minetestLegacyWorldPath = "/home/chouette/.minetest/worlds/${minetestWorldName}";
@@ -27,7 +28,8 @@ let
     version = minecloniaVersion;
     src = pkgs.fetchzip {
       url = "https://codeberg.org/mineclonia/mineclonia/archive/${minecloniaVersion}.tar.gz";
-      hash = "sha256-+0PZUR24cILm6fgL4H/zhbHpMLK3Dg91Ihs0YfAoboU=";
+      # hash = "sha256-+0PZUR24cILm6fgL4H/zhbHpMLK3Dg91Ihs0YfAoboU=";
+      hash = "sha256-LiX0b2p3HBN25BKp6LDd3P7k98hdtxQRMFiCo3ruaTM=";
       stripRoot = false;
     };
     dontConfigure = true;
