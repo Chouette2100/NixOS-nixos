@@ -83,6 +83,7 @@ in
     ];
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIESoXUKQ+RNr/bJ99H09filTh0Xfh4E8/oK4kIV5KOeq chouette@600G4Mint"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMS5q9FyP4+lUwHT93qB1UoWg3VJ+CP1SAYiq3AhKnQa u0_a543@localhost"
     ];
   };
 
@@ -206,6 +207,8 @@ in
     ripgrep
     bat
     fd
+    #
+    tldr
     # mysql-workbench # /usr/sbin/mysqld  Ver 8.0.45-0ubuntu0.24.04.1に対応していない
     # wineWowPackages.stable # 64bitおよび32bit環境をサポートする安定版
     # winetricks             # 各種ライブラリ導入ツール（必要に応じて）

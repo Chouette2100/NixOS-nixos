@@ -35,26 +35,52 @@ in
     };
     ".ssh/config" = {
       text = ''
+      # Tailscale SSH は 22 を使う。これを 9978 のデフォルトより前に定義する。
+      Host *.ts.net
+        HostName %h
+        User chouette
+        Port 22
+        StrictHostKeyChecking accept-new
+        IdentitiesOnly yes
+        IdentityFile ~/.ssh/id_ed25519
+        ServerAliveInterval 60
+        ServerAliveCountMax 3
+
+      Host kagoya10.tail2b675a.ts.net
+        HostName kagoya10.tail2b675a.ts.net
+        User chouette
+        Port 22
+        StrictHostKeyChecking accept-new
+        IdentitiesOnly yes
+        IdentityFile ~/.ssh/id_ed25519
+        ServerAliveInterval 60
+        ServerAliveCountMax 3
+
       Host github.com
         HostName github.com
         Port 22
         User git
+
       Host u2604C
         HostName 10.231.221.222
         User chouette
+
       Host u2404D
         HostName 10.231.221.162
         User chouette
+
       Host nix01
         HostName 133.18.43.195
         User chouette
+
+      # ここからが全体の既定値。Tailscale は上で明示的に上書きされる。
       Host *
         Port 9978
-        AddressFamily inet
         IdentityFile ~/.ssh/id_ed25519
         IdentitiesOnly yes
         ServerAliveInterval 60
         ServerAliveCountMax 3
+        ForwardAgent yes
       '';
       force = true;
     };

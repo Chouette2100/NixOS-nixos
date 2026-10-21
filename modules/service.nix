@@ -51,11 +51,6 @@ systemd.services.ssh-tunnel-kagoya = {
     ExecStart = ''
       ${pkgs.openssh}/bin/ssh -p 9978 -o ServerAliveInterval=60 -o ExitOnForwardFailure=yes -N \
         -L 9910:127.0.0.1:3306 \
-        -L 9384:127.0.0.1:8384 \
-        -R 8008:localhost:8008 \
-        -R 8009:localhost:8009 \
-        -R 8878:localhost:9978 \
-        -R 30000:localhost:8008 \
         chouette@133.18.160.207
     '';
     Restart = "always";
@@ -86,10 +81,11 @@ systemd.services.ssh-tunnel-nix01 = {
 
 # Port forwarding
 systemd.services.ssh-tunnel-ubuntu05 = {
+  enable = false; # 起動時に自動でトンネルを作らない
   description = "SSH Tunnel to ubuntu05 (Local & Reverse)";
   after = [ "network-online.target" ];
   wants = [ "network-online.target" ];
-  wantedBy = [ "multi-user.target" ]; # これでログイン不要で起動
+  # wantedBy = [ "multi-user.target" ]; # 手動起動だけにしたい場合はコメント化
 
   # SSHトンネル設定
   # ローカル:9998 → リモートMySQL(REPLICA) (127.0.0.1:3306)

@@ -44,7 +44,7 @@ in
     };
     ipv6 = {
       method = "auto";
-      ignore-auto-dns = true;
+      ignore-auto-dns = false;
     };
   };
   networking.nftables.enable = true;
