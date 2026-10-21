@@ -9,26 +9,26 @@ in
   networking.networkmanager.enable = true;
 
   # DNS設定の目的:
-  # - LAN内の dnsmasq サーバー (192.168.0.24) を名前解決の参照先に統一する。
-  # - DHCP で配られる上位DNSではなく、まずローカルの dnsmasq を使いたい。
+  # - DHCP 配布 DNS を基本とするオーソドックスな構成に戻す。
+  # - Tailscale MagicDNS が有効な場合は、それを優先的に利用する。
+  # - LAN 内ホスト名は `networking.hosts` で静的に補完する。
   #
   # 設定方針:
-  # - `networking.nameservers` でシステム全体の静的DNS候補として 192.168.0.24 を入れる。
+  # - `networking.nameservers` は指定しない。DHCP 配布 DNS を尊重する。
   # - `ensureProfiles` で `eno1` の NetworkManager プロファイルを宣言し、
-  #   DHCP 由来の DNS を無視して 192.168.0.24 を使う。
-  # - `insertNameservers` は補助的な設定として残している。
+  #   DHCP 由来の DNS をそのまま使う。
+  # - `insertNameservers` は削除済み。
   #
   # 注意点:
   # - NetworkManager の接続がすでに張られている場合、`nixos-rebuild switch` の後に
   #   接続の再アクティベート (`nmcli connection down/up`) が必要になることがある。
   # - `wired-eno1` の `uuid` と `interface-name` は現環境の `eno1` / 「有線接続 1」用。
   #   NIC名や接続UUIDが変わった場合はここも更新する。
-  networking.networkmanager.insertNameservers = [ "192.168.0.24" ];
-  networking.nameservers = [ "192.168.0.24" ];
 
   # 実装の要点:
-  # - IPv4 は DHCP でアドレスを取得しつつ DNS だけ固定する。
-  # - IPv6 も自動配布DNSを無視する。必要になれば `ipv6.dns` を別途明示する。
+  # - IPv4 / IPv6 ともに DHCP でアドレスを取得しつつ DNS も DHCP 配布 DNS を尊重する。
+  # - LAN 内ホスト名は `networking.hosts` で補完する。
+  # - dnsmasq (192.168.0.24) は今回の構成では使用しない。必要に応じて `networking.hosts` に移行する。
   networking.networkmanager.ensureProfiles.profiles."wired-eno1" = {
     connection = {
       id = "有線接続 1";
@@ -39,8 +39,8 @@ in
     };
     ipv4 = {
       method = "auto";
-      ignore-auto-dns = true;
-      dns = "192.168.0.24;";
+      # DHCP 配布 DNS をそのまま使う
+      ignore-auto-dns = false;
     };
     ipv6 = {
       method = "auto";
