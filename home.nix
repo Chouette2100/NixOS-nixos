@@ -65,10 +65,11 @@ in
       #   User chouette
       #   Port 9978
       #
-      # Host nix01
-      #   HostName 133.18.43.195
-      #   User chouette
-      #   Port 9978
+
+      Host nix01
+         HostName 133.18.43.195
+         User chouette
+         Port 9978
 
       # 全体の既定値。Tailscale ホストは上で明示的に上書きされる。
       Host *
