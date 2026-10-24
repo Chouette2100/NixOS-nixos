@@ -6,6 +6,7 @@
   nix = {
     settings = {
       experimental-features = [ "nix-command" "flakes" ];
+      trusted-users = [ "root" "@wheel" ]; # id=5572   modelname=deepseek-v4-flash 26-10-24 19:54
       substituters = [
         "https://cache.nixos.org"
         "https://nix-community.cachix.org"

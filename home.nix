@@ -124,7 +124,10 @@ in
     "f /home/chouette/.ssh/config 0600 - - - -"
   ];
 
-  programs.direnv.enable = true;
+  programs.direnv = {
+    enable = true;
+    nix-direnv.enable = true;
+  };
 
   /*
   programs.google-chrome = {
