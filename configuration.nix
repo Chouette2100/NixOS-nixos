@@ -59,6 +59,7 @@ in
     ./modules/filesystems.nix
     ./modules/backup.nix
     ./modules/printer.nix
+    # ./modules/message-to-discord.nix
   ];
 
   # QEMU/KVM専用設定（SPICE / QXL）
@@ -169,7 +170,7 @@ in
     gforth
     joplin-desktop
     obsidian
-    go
+    go_1_27
     gopls
     delve
     golangci-lint

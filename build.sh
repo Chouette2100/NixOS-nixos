@@ -9,10 +9,10 @@ if [ -z "$1" ]; then
 fi
 if [ "$1" = "qemu" ]; then
     echo "Building for QEMU..."
-    sudo nixos-rebuild switch --flake '.#qemu'
+    sudo nixos-rebuild switch --impure --flake '.#qemu'
 elif [ "$1" = "600g4" ]; then
     echo "Building for 600g4..."
-    sudo nixos-rebuild switch --flake '.#baremetal'
+    sudo nixos-rebuild switch --impure --flake '.#baremetal'
 else
     echo "Usage: $0 [qemu|600g4]"
     exit 1
