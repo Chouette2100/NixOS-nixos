@@ -62,6 +62,10 @@ in
     # ./modules/message-to-discord.nix
   ];
 
+  services.journald.extraConfig = ''
+    SystemMaxUse=1G
+  '';
+
   # QEMU/KVM専用設定（SPICE / QXL）
   # services.spice-vdagentd.enable = isQemu; # ==> modules/containers.nix
   boot.kernelParams = lib.optionals isQemu [ "video=2560x1440@60" ];
