@@ -12,7 +12,7 @@
 
 # { config, lib, pkgs, machineType ? "baremetal", ... }:
 
-{ lib, pkgs, machineType ? "baremetal", ... }:
+{ lib, pkgs, pkgs-unstable, machineType ? "baremetal", ... }:
 
 let
   isQemu = machineType == "qemu";
@@ -172,7 +172,7 @@ in
     librecad
     inkscape
     gforth
-    joplin-desktop
+    pkgs-unstable.joplin-desktop
     obsidian
     go_1_27
     gopls
