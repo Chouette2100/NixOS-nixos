@@ -41,6 +41,7 @@
 # incus
   virtualisation.incus = {
     enable = true;
+    package = pkgs.incus;
     # 初回起動時に自動設定を行う（incus admin init の代わり）
     # 注：既にインスタンスが存在する場合、プリシードは有効化しないこと
     #    （起動時に preseed が実行されると、既存インスタンスのプロフィールロックエラーが発生します）
