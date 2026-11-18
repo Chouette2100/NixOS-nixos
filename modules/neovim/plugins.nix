@@ -97,7 +97,7 @@
 
     # Copilot 本体の設定
     copilot-lua = {
-      enable = true;
+      enable = false;
       settings = {
         suggestion = {
           enabled = true;
@@ -122,7 +122,7 @@
     };
 
     copilot-chat = {
-      enable = true;
+      enable = false;
     };
 
   };

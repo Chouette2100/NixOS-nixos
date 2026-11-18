@@ -41,7 +41,8 @@ in
       Host *.ts.net
         HostName %h
         User chouette
-        Port 22
+        # Port 22
+        Port 9978
         StrictHostKeyChecking accept-new
         IdentitiesOnly yes
         IdentityFile ~/.ssh/id_ed25519
@@ -73,6 +74,7 @@ in
 
       # 全体の既定値。Tailscale ホストは上で明示的に上書きされる。
       Host *
+        Port 9978
         IdentityFile ~/.ssh/id_ed25519
         IdentitiesOnly yes
         ServerAliveInterval 60
