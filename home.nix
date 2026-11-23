@@ -388,7 +388,10 @@ systemd.user.services.dropbox-mount = {
     ExecStart = ''
       ${pkgs.rclone}/bin/rclone mount dropbox: %h/Dropbox \
         --config=/home/chouette/.config/rclone/rclone.conf \
-        --vfs-cache-mode writes
+        --vfs-cache-mode writes \
+        --dir-perms=0700 \
+        --file-perms=0600 \
+        --allow-non-empty
     '';
     ExecStop = "/run/current-system/sw/bin/fusermount -u /home/chouette/Dropbox";
     Restart = "on-failure";

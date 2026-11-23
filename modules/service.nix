@@ -25,15 +25,20 @@ services.mysql = {
 # NFS
 services.nfs.server = {
   enable = true;
+  mountdPort = 4002;
+  statdPort = 4000;
+  lockdPort = 4001;
   exports = ''
-    /home/chouette/MyProject 192.168.0.0/16(rw,sync,no_subtree_check,root_squash)
-    /mnt/nfsh/custom/default_samba 10.231.221.0/24(rw,sync,no_subtree_check,root_squash)
+    # /mnt/lxddefault/custom/default_samba 10.231.221.0/24(rw,sync,no_subtree_check,all_squash,anonuid=1001,anongid=985)
+    # /mnt/lxddefault/custom/default_samba 192.168.0.0/24(rw,sync,no_subtree_check,all_squash,anonuid=1001,anongid=985)
+    # /mnt/lxddefault/custom/default_samba 192.168.122.0/24(rw,sync,no_subtree_check,all_squash,anonuid=1001,anongid=985)
+    /mnt/lxddefault/custom/default_samba 100.64.0.0/10(rw,sync,no_subtree_check,all_squash,anonuid=1001,anongid=985)
   '';
 };
 
 # NFSに必要なポートを開放
-networking.firewall.allowedTCPPorts = [ 111 2049 4000 4001 4002 ];
-networking.firewall.allowedUDPPorts = [ 111 2049 4000 4001 4002 ];
+# networking.firewall.allowedTCPPorts = [ 111 2049 4000 4001 4002 ];
+# networking.firewall.allowedUDPPorts = [ 111 2049 4000 4001 4002 ];
 
 
 # Port forwarding

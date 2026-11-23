@@ -89,6 +89,9 @@ in
     openssh.authorizedKeys.keys = [
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIESoXUKQ+RNr/bJ99H09filTh0Xfh4E8/oK4kIV5KOeq chouette@600G4Mint"
       "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMS5q9FyP4+lUwHT93qB1UoWg3VJ+CP1SAYiq3AhKnQa u0_a543@localhost"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJA8RqSj3aigpEDWxmivfDgjH8bisQF09KQg9Zc6VIg0 chouette@fbsd151"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIIrtps0AcS0tlvVhtkCvyg05Agzz2UwkKzQMGykpzkgu chouette@nbsd110"
+      "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAINgYY8tuKBcycveQ1nieg6gL+xEASW64SqvEYGdiyCip chouette@obsd80.my.domain"
     ];
   };
 

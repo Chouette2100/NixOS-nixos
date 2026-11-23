@@ -52,6 +52,16 @@ in
       fsType = "btrfs";
       options = [ "bind" ];
     };
+    "/home/chouette/kb" = {
+      device = "/mnt/nfsh/custom/default_samba/kb";
+      fsType = "btrfs";
+      options = [ "bind" ];
+    };
+    "/home/chouette/Backup" = {
+      device = "/mnt/nfsh/custom/default_samba/Backup";
+      fsType = "btrfs";
+      options = [ "bind" ];
+    };
     "/home/chouette/Downloads" = {
       device = "/mnt/nfsh/custom/default_samba/Downloads";
       fsType = "btrfs";
@@ -62,8 +72,23 @@ in
       fsType = "btrfs";
       options = [ "bind" ];
     };
+    "/home/chouette/Music" = {
+      device = "/mnt/nfsh/custom/default_samba/Music";
+      fsType = "btrfs";
+      options = [ "bind" ];
+    };
     "/home/chouette/Pictures" = {
       device = "/mnt/nfsh/custom/default_samba/Pictures";
+      fsType = "btrfs";
+      options = [ "bind" ];
+    };
+    "/home/chouette/Public" = {
+      device = "/mnt/nfsh/custom/default_samba/Public";
+      fsType = "btrfs";
+      options = [ "bind" ];
+    };
+    "/home/chouette/Videos" = {
+      device = "/mnt/nfsh/custom/default_samba/Videos";
       fsType = "btrfs";
       options = [ "bind" ];
     };
