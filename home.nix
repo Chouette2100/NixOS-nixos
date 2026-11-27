@@ -25,6 +25,7 @@ in
 
   imports = [
     ./modules/neovim
+    ./modules/dsh.nix
   ];
 
   # SSH鍵の設定（sourceを使用）
